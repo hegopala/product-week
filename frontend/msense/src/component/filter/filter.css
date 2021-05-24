@@ -1,0 +1,17 @@
+.filter-wrapper {
+    display: flex;
+    margin: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.filter-item {
+    flex:1;
+    margin: 10px 15px;
+}
+
+.filter-heading {
+    font-family: 'Roboto', 'sans-serif';
+    font-size: 12px;
+    color: #505050
+}

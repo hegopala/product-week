@@ -1,0 +1,23 @@
+.assetinfoblock-container {
+    display: flex;
+    justify-content: center;
+}
+
+.assetinfoblock-container>img {
+    margin-right: 20px;
+}
+
+.assetinfoblock-data {
+    font-size: 40px;
+    font-family: 'Roboto', 'sans-serif';
+    font-weight: bold;
+    margin: 0;
+}
+
+.assetinfoblock-title {
+    font-size: 20px;
+    font-family: 'Roboto', 'sans-serif';
+    font-weight: bold;
+    margin: 0;
+    color: #5f5f5f;
+}

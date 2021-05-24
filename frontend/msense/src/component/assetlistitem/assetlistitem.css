@@ -1,0 +1,19 @@
+.assetlistitem-container {
+    padding: 10px;
+    max-width: 300px;
+    text-align: center;
+    min-width: 200px;
+    margin: 5px 10px;
+}
+
+.bad {
+    background-color: red;
+}
+
+.moderate {
+    background-color: yellow;
+}
+
+.good {
+    background-color: green;
+}

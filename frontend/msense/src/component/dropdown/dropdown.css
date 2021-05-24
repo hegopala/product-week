@@ -1,0 +1,36 @@
+.dropdown-container {
+    font-family: 'Roboto', sans-serif;
+    display: flex;
+    max-width: 100%;
+    justify-content: center;
+    background-color: #d3d3d3;
+    box-shadow: 0px 0px 3px #888888;
+}
+
+.dropdown-button {
+    cursor: pointer;
+    padding: 5px;
+    position: relative;
+}
+
+.dropdown-arrow {
+    margin-left: 30px;
+}
+
+.dropdown-options {
+    position: absolute;
+    margin-top: 20px;
+}
+
+.dropdown-options>p {
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.show {
+    display: block;
+}
+
+.hide {
+    display: none;
+}
