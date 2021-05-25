@@ -1,0 +1,35 @@
+.notification-item {
+    margin: 10px;
+    padding: 10px;
+    font-family: 'Roboto', 'sans-serif';
+    background-color: aquamarine;
+    box-shadow: -1px 1px 10px -1px rgba(0, 0, 0, 0.43);
+    -webkit-box-shadow: -1px 1px 10px -1px rgba(0, 0, 0, 0.43);
+    -moz-box-shadow: -1px 1px 10px -1px rgba(0, 0, 0, 0.43);
+    display: flex;
+    border-radius: 3px;
+}
+
+.notification-item-date {
+    margin: 5px 10px;
+    align-self: center;
+}
+
+.notification-item-date-day {
+    font-size: 20px;
+}
+
+.notification-item-date-month {
+    font-size: 14px;
+}
+
+.notification-item-divider {
+    margin: 0 5px;
+    width: 1px;
+    background-color: #505050;
+}
+
+.notification-item-text {
+    margin: 0 5px;
+    text-align: start;
+}

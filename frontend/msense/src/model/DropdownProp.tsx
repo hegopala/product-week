@@ -1,6 +1,8 @@
+import CustomString from "./CustomString";
+
 interface DropdownProps {
-    name?:string,
-    options?: any[]
+    name?: string,
+    options?: CustomString[]
 }
 
 export default DropdownProps;

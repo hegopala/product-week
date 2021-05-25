@@ -3,17 +3,18 @@ import DropdownProps from '../../model/DropdownProp';
 
 import './dropdown.css';
 import DownArrowImage from './../../assets/svg/down-arrow.svg';
+import CustomString from '../../model/CustomString';
 
 const Dropdown: React.FC<DropdownProps> = (props) => {
 
     const [isOptionsVisible, setOptionsVisible] = React.useState<boolean>(false);
-    const [selectedOption, setSelectedOption] = React.useState<string | undefined>(props.name);
+    const [selectedOption, setSelectedOption] = React.useState<CustomString | undefined>(props.name);
 
     const toggleOptions = () => {
         setOptionsVisible(!isOptionsVisible);
     }
 
-    const optionsClickHandler = (option?:string) => {
+    const optionsClickHandler = (option?: CustomString) => {
         setSelectedOption(option);
         toggleOptions();
     }
@@ -21,11 +22,19 @@ const Dropdown: React.FC<DropdownProps> = (props) => {
     return (
         <div className="dropdown-container">
             <div onClick={toggleOptions} className="dropdown-button">
-                <span>{selectedOption}</span>
-                <img src={DownArrowImage} width="10px" className="dropdown-arrow" alt="Dropdown arrow" />
+                <span>{selectedOption?.toString()}</span>
+                <img src={DownArrowImage} width="10px" alt="Dropdown arrow" />
             </div>
-            <div className={isOptionsVisible ? "dropdown-options show" : "dropdown-options hide"}>
-                {props.options?.map((option) => (<p onClick={() => optionsClickHandler(option)}>{option}</p>))}
+            <div className={isOptionsVisible ? "dropdown-options dropdown-show" : "dropdown-options dropdown-hide"}>
+                {props.options?.map(
+                    (option) => (
+                        <div className="dropdown-options-item" key={option.toString()}>
+                            <p onClick={() => optionsClickHandler(option)}>{option.toString()}</p>
+                            <div className="dropdown-options-divider"></div>
+                        </div>
+                    )
+                )
+                }
             </div>
         </div>
     );
