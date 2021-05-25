@@ -1,0 +1,47 @@
+.notification-pane {
+    width: 30vw;
+    height: 100vh;
+    overflow: scroll;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transition: transform .3s cubic-bezier(0, .52, 0, 1);
+    z-index: 2;
+    background-color: #ffffff;
+    box-shadow: 4px 0px 4px -1px rgba(0, 0, 0, 0.43);
+    -webkit-box-shadow: 4px 0px 4px -1px rgba(0, 0, 0, 0.43);
+    -moz-box-shadow: 4px 0px 4px -1px rgba(0, 0, 0, 0.43);
+    text-align: center;
+}
+
+.notification-pane::-webkit-scrollbar {
+    width: 10px;
+}
+
+.notification-pane::-webkit-scrollbar-track {
+    background-color: transparent;
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+}
+
+.notification-pane::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: #a5a5a5;
+}
+
+.notification-pane-translate-show {
+    transform: translate3d(0vw, 0, 0);
+}
+
+.notification-pane-translate-hide {
+    transform: translate3d(-30vw, 0, 0);
+}
+
+.notification-list-container {
+    margin: 10px 10px 0 10px;
+}
+
+.notification-pane-priority-filter-container {
+    margin: 20px 30px 20px 20px;
+}

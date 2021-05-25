@@ -1,0 +1,9 @@
+.assetlist-heading {
+    margin-left: 10px;
+    font-family: 'Roboto', 'sans-serif';
+}
+
+.assetlist {
+    display: flex;
+    flex-wrap: wrap;
+}
