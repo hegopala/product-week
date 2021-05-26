@@ -4,16 +4,19 @@
     text-align: center;
     min-width: 200px;
     margin: 5px 10px;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
 }
 
 .assetlistitem-bad {
-    background-color: red;
+    background-color: #d4413c;
 }
 
 .assetlistitem-moderate {
-    background-color: yellow;
+    background-color: #dfdf3b;
 }
 
 .assetlistitem-good {
-    background-color: green;
+    background-color: #00ab66;
 }
