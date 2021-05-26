@@ -1,24 +1,55 @@
-import { Button, FormControl, Input, InputLabel, NativeSelect, Link as LinkUI } from '@material-ui/core';
+import { Button, FormControl, Input, InputLabel, Link as LinkUI } from '@material-ui/core';
 import React from 'react';
+import Employee from './employee/Employee';
+import Factory from './factory/Factory';
 import './register.css';
+import SecurityQuestion from './securityquestion/SecurityQuestion';
 
 const Register: React.FC = () => {
 
-    const slides = [getFactorySlide(), getEmployeeSlide(), getSecurityQuestionSlide(), getPasswordSlide()];
+    let factoryDetail: { [key: string]: string } = {};
+    let employeeDetail: { [key: string]: string } = {};
+    let securityQuestionDetail: { [key: string]: string } = {};
+
+    let isFactoryDetailValid = false;
+    let isEmployeeDetailValid = false;
+    let isSecurityQuestionDetailValid = false;
+
+    const onFactoryDetailChange = (detail: { [key: string]: string }) => factoryDetail = detail;
+    const onEmployeeDetailChange = (detail: { [key: string]: string }) => employeeDetail = detail;
+    const onSecurityQuestionDetailChange = (detail: { [key: string]: string }) => securityQuestionDetail = detail;
+
+    const onFactoryDatailValidationStateChange = (valid: boolean) => isFactoryDetailValid = valid;
+    const onEmployeeyDatailValidationStateChange = (valid: boolean) => isEmployeeDetailValid = valid;
+    const onSecurityQuestionDatailValidationStateChange = (valid: boolean) => isSecurityQuestionDetailValid = valid;
+
+    const slides = [
+        <Factory value={factoryDetail} onDataChange={onFactoryDetailChange} onDataValidationStateChange={onFactoryDatailValidationStateChange} />,
+        <Employee value={employeeDetail} onDataChange={onEmployeeDetailChange} onDataValidationStateChange={onEmployeeyDatailValidationStateChange} />,
+        <SecurityQuestion value={securityQuestionDetail} onDataChange={onSecurityQuestionDetailChange} onDataValidationStateChange={onSecurityQuestionDatailValidationStateChange} />,
+        getPasswordSlide()
+    ];
+
     const [visibleSlide, setVisibleSlide] = React.useState(0);
 
-    const onBackButtonClick = () => {
-        if (visibleSlide > 0) {
-            setVisibleSlide(visibleSlide - 1);
+    const validateCurrentSlide = () => {
+        switch (visibleSlide) {
+            case 0: return isFactoryDetailValid;
+            case 1: return isEmployeeDetailValid;
+            case 2: return isSecurityQuestionDetailValid;
+            default: return true;
         }
     }
 
-    const onNextButtonClick = () => {
-        if (visibleSlide < slides.length - 1) {
-            setVisibleSlide(visibleSlide + 1);
+    const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+        console.log(factoryDetail, employeeDetail, securityQuestionDetail);
+        if(!(isEmployeeDetailValid && isFactoryDetailValid && isSecurityQuestionDetailValid)) {
+            event.preventDefault();
         }
     }
 
+    const onBackButtonClick = () => visibleSlide > 0 && setVisibleSlide(visibleSlide - 1);
+    const onNextButtonClick = () => visibleSlide < slides.length - 1 && validateCurrentSlide() && setVisibleSlide(visibleSlide + 1);
     const isFirstSlide = () => visibleSlide === 0;
     const isLastSlide = () => visibleSlide === slides.length - 1;
 
@@ -26,7 +57,7 @@ const Register: React.FC = () => {
         <div className="register">
             <div className="register-form-wrapper">
                 <h1 className="product-heading">MSense</h1>
-                <form action="/dashboard" className="register-form">
+                <form action="/dashboard" className="register-form" onSubmit={event => onFormSubmit(event)}>
                     {slides[visibleSlide]}
                     <div className="register-controls">
                         {
@@ -61,80 +92,6 @@ const getPasswordSlide = () => {
             <FormControl fullWidth={true} style={{ visibility: "hidden" }}>
                 <InputLabel htmlFor="security-hidden">Hidden</InputLabel>
                 <Input id="security-hidden" type="text" disabled autoComplete="off" />
-            </FormControl>
-        </div>
-    );
-}
-
-const getSecurityQuestionSlide = () => {
-
-    const options = [{
-        text: "My birth place ?",
-        value: "birth-place"
-    }, {
-        text: "My first school name ?",
-        value: "first-school-name"
-    }];
-
-    return (
-        <div className="register-slide">
-            <h3>Security Question</h3>
-            <FormControl fullWidth={true} required={true}>
-                <InputLabel id="security-question-label" htmlFor="security-question">Security question</InputLabel>
-                <NativeSelect
-                    id="security-question"
-                    input={<Input />}>
-                    <option aria-label="None" value="" />
-                    {options.map(option => (<option key={option.value} value={option.value}>{option.text}</option>))}
-                </NativeSelect>
-            </FormControl>
-            <FormControl fullWidth={true} required={true}>
-                <InputLabel htmlFor="security-answer">Answer</InputLabel>
-                <Input id="security-answer" type="text" autoComplete="off" />
-            </FormControl>
-            <FormControl fullWidth={true} style={{ visibility: "hidden" }}>
-                <InputLabel htmlFor="security-hidden">Hidden</InputLabel>
-                <Input id="security-hidden" type="text" disabled autoComplete="off" />
-            </FormControl>
-        </div>
-    );
-}
-
-const getEmployeeSlide = () => {
-    return (
-        <div className="register-slide">
-            <h3>Employee Details</h3>
-            <FormControl fullWidth={true} required={true}>
-                <InputLabel htmlFor="employee-id">ID</InputLabel>
-                <Input id="employee-id" type="text" autoComplete="off" />
-            </FormControl>
-            <FormControl fullWidth={true} required={true}>
-                <InputLabel htmlFor="employee-email">Email</InputLabel>
-                <Input id="employee-email" type="text" autoComplete="off" />
-            </FormControl>
-            <FormControl fullWidth={true} required={true}>
-                <InputLabel htmlFor="employee-contact">Contact number</InputLabel>
-                <Input id="employee-contact" type="text" autoComplete="off" />
-            </FormControl>
-        </div>
-    );
-}
-
-const getFactorySlide = () => {
-    return (
-        <div className="register-slide">
-            <h3>Factory Details</h3>
-            <FormControl fullWidth={true} required={true}>
-                <InputLabel htmlFor="factory-name">Name</InputLabel>
-                <Input id="factory-name" type="text" autoComplete="off" />
-            </FormControl>
-            <FormControl fullWidth={true} required={true}>
-                <InputLabel htmlFor="factory-location">Location</InputLabel>
-                <Input id="factory-location" type="text" autoComplete="off" />
-            </FormControl>
-            <FormControl fullWidth={true} required={true}>
-                <InputLabel htmlFor="factory-type">Industry type</InputLabel>
-                <Input id="factory-type" type="text" autoComplete="off" />
             </FormControl>
         </div>
     );
