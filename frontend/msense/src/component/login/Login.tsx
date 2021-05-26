@@ -1,28 +1,13 @@
+import { Button, FormControl, Input, InputLabel, Link as LinkUI } from '@material-ui/core';
 import React from 'react';
-import { Link } from 'react-router-dom';
-import InputField from '../inputfield/InputField';
-import './Login.css';
 import isEmail from 'validator/lib/isEmail';
+import './login.css';
 
 const Login: React.FC = () => {
   const [isEmailError, setEmailError] = React.useState(false);
-  const [isPasswordError, setPasswordError] = React.useState(false);
 
-  let email: (string | undefined);
-  let password: (string | undefined);
-
-  const onEmailChange = (val?: string) => {
-    email = val;
-    validateEmail()
-  }
-
-  const onPasswordChange = (val?: string) => {
-    password = val;
-    validatePassword()
-  }
-
-  const validateEmail = () => {
-    if (!(email && isEmail(email))) {
+  const validateEmail = (val?: string) => {
+    if (!val || !isEmail(val)) {
       setEmailError(true);
       return false;
     }
@@ -30,37 +15,42 @@ const Login: React.FC = () => {
     return true;
   }
 
-  const validatePassword = () => {
-    if (!password || password?.length === 0) {
-      setPasswordError(true);
-      return false;
-    }
-    setPasswordError(false);
-    return true;
-  }
-
-  const onFormSubmit = (event: React.MouseEvent) => {
-    if (!validateEmail() || !validatePassword()) {
-      event.preventDefault();
-    }
+  const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    if (isEmailError) event.preventDefault();
   }
 
   return (
     <div className="login-wrapper">
-      <h1>Login</h1>
-      <div>
-        <InputField value={email} onInputChange={onEmailChange} placeholder="Email" type="email" />
-        {isEmailError ? (<p>Not valid Email</p>) : (<p></p>)}
-        <InputField value={password} onInputChange={onPasswordChange} placeholder="Password" type="password" />
-        {isPasswordError ? (<p>Not valid Password</p>) : (<p></p>)}
-        <Link to="/forgotpassword">
-          <p>forgot password ?</p>
-        </Link>
-
-        <Link to="/dashboard" onClick={event => onFormSubmit(event)}>
-          <button >Submit</button>
-        </Link>
-        <p>not a member ? &nbsp;&nbsp;<Link to="/register">Register</Link></p>
+      <div className="login-form">
+        <h1 className="product-heading">MSense</h1>
+        <form onSubmit={event => onFormSubmit(event)} action="/dashboard">
+          <FormControl fullWidth={true} required={true} error={isEmailError}>
+            <InputLabel htmlFor="email">Email</InputLabel>
+            <Input onChange={(event) => validateEmail(event.target.value)} id="email" type="email" autoComplete="off" />
+          </FormControl>
+          <FormControl fullWidth={true} required={true}>
+            <InputLabel htmlFor="password">Password</InputLabel>
+            <Input id="password" type="password" autoComplete="off" />
+          </FormControl>
+          <div className="login-forgot-password-wrapper">
+            <LinkUI href="/forgot" variant="body2">
+              Forgot password?
+            </LinkUI>
+          </div>
+          <FormControl fullWidth={true}>
+            <Button variant="contained" color="secondary" style={{ backgroundColor: "cornflowerblue" }} type="submit">
+              Login
+            </Button>
+          </FormControl>
+        </form>
+        <div className="login-register-wrapper">
+          <p>
+            Not a member ?&nbsp;
+            <LinkUI href="/register" variant="body2">
+              Register
+            </LinkUI>
+          </p>
+        </div>
       </div>
     </div>
   )

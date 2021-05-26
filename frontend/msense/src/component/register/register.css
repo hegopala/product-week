@@ -1,33 +1,31 @@
-.login-wrapper {
+.register {
     width: 100vw;
     height: 100vh;
-    position: fixed;
-    overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: cadetblue;
 }
 
-.login-form {
+.register-form-wrapper {
     border-radius: 2%;
     font-family: 'Roboto', 'sans-serif';
     padding: 30px;
-    max-width: 300px;
-    min-width: 200px;
+    width: 300px;
+    height: 350px;
     background-color: white;
     box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.54);
     -webkit-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.54);
     -moz-box-shadow: 0px 0px 12px 0px rgba(0, 0, 0, 0.54);
 }
 
-.login-register-wrapper {
-    margin-top: 20px;
-    text-align: center;
+.register-form {
+    position: relative;
 }
 
-.login-forgot-password-wrapper {
-    text-align: end;
-    margin-top: 20px;
-    margin-bottom: 20px;
+.register-controls {
+    margin-top: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
