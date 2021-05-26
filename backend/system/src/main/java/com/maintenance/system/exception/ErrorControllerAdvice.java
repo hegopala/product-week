@@ -42,9 +42,19 @@ public class ErrorControllerAdvice {
      *
      * @param assetHealthPropNotFoundException [AssetHealthPropNotFoundException]
      */
+    @ExceptionHandler(value = AssetHealthPropNotFoundException.class)
     public void exception(AssetHealthPropNotFoundException assetHealthPropNotFoundException) {
         log.error("asset_health.properties not found !!! " + assetHealthPropNotFoundException);
     }
 
 
+    /**
+     * This is used for throw UserNotFoundException in case of user not found
+     *
+     * @param userNotFoundException [UserNotFoundException]
+     */
+    @ExceptionHandler(value = UserNotFoundException.class)
+    public void exception(UserNotFoundException userNotFoundException) {
+        log.error("user not found !!! " + userNotFoundException);
+    }
 }

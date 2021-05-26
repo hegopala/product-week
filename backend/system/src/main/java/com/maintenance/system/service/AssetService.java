@@ -34,9 +34,21 @@ public class AssetService {
 
     /**
      * This method uses for generate the asset health
+     *
      * @return returns the list of asset health
      */
     public List<AssetHealth> generateAssetHealth() {
         return assetHealthGenerator.generateAssetHealth();
     }
+
+
+    /**
+     * This method fetch the asset health history from repository
+     *
+     * @return returns list of asset health object
+     */
+    public List<AssetHealth> getAssetHealthHistory() {
+        return allAssetDetails.getAssetHealthHistory();
+    }
+
 }
