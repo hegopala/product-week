@@ -10,7 +10,7 @@ const InputField: React.FC<InputFieldProps> = (props) => {
     }
     return (
         <div>
-            <input onInput={event => onInputChange(event)} type={props.type} placeholder={props.placeholder} />
+            <input value={props.value} onInput={event => onInputChange(event)} type={props.type} placeholder={props.placeholder} />
         </div>
     );
 }
