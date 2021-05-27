@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 /**
  * This is controller which fetches the logged in user data from database
  *
@@ -21,7 +23,7 @@ public class UserController {
     private UserService userService;
 
     /**
-     * This method returns the loggedIn user details
+     * This api returns the loggedIn user details
      *
      * @return user object
      */
@@ -31,14 +33,25 @@ public class UserController {
     }
 
     /**
-     * This method is responsible for the user login validation
+     * This api is responsible for the user login validation
      *
      * @param user User object(String email, String password, Integer emp_id)
+     * @return return true in case of successful login or else false
      */
-    @PostMapping("/users/login")
+    @PostMapping("/user/login")
     public boolean validateUser(@RequestBody User user) {
         return userService.validateUser(user);
     }
 
+    /**
+     * This api will help to register the new user
+     *
+     * @param user [user] user details (Integer emp_id, String email, String password)
+     * @return returns the list of registered user
+     */
+    @PostMapping("/user/register")
+    public List<User> registerUser(@RequestBody User user) {
+        return userService.registerUser(user);
+    }
 
 }

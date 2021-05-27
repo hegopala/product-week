@@ -92,12 +92,12 @@ public class CustomFunctions {
 
     /**
      * This method used to validate the email format
+     *
      * @param email [String] email
      * @return returns boolean, true in case of valid email format or else false
      */
-    public static boolean isValidEmail(@NonNull String email)
-    {
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+    public static boolean isValidEmail(@NonNull String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\." +
                 "[a-zA-Z0-9_+&*-]+)*@" +
                 "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
                 "A-Z]{2,7}$";

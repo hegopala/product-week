@@ -1,8 +1,6 @@
 package com.maintenance.system.exception;
 
 import lombok.extern.slf4j.Slf4j;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -24,7 +22,7 @@ public class ErrorControllerAdvice {
 
     @ExceptionHandler(value = NoSuchAssetFoundException.class)
     public void exception(NoSuchAssetFoundException noSuchAssetFoundException) {
-        log.error("[AllAssetDetails] [getAllAssets] " + noSuchAssetFoundException);
+        log.error("[ASSET table does not have any asset info !!!] " + noSuchAssetFoundException);
     }
 
     /**
@@ -34,7 +32,7 @@ public class ErrorControllerAdvice {
      */
     @ExceptionHandler(value = MismatchedPasswordException.class)
     public void exception(MismatchedPasswordException mismatchedPasswordException) {
-        log.error("[MismatchedPasswordException] " + mismatchedPasswordException);
+        log.error("Incorrect Password !!! " + mismatchedPasswordException);
     }
 
 
@@ -58,5 +56,15 @@ public class ErrorControllerAdvice {
     public void exception(UserNotFoundException userNotFoundException) {
         log.error("user not found !!! " + userNotFoundException);
     }
+
+    /**
+     * This is used for throw InvalidEmailFormatException in case of incorrect email
+     * @param invalidEmailFormatException [InvalidEmailFormatException]
+     */
+    @ExceptionHandler(value = InvalidEmailFormatException.class)
+    public void exception(InvalidEmailFormatException invalidEmailFormatException) {
+        log.error("Invalid Email Exception !!! " + invalidEmailFormatException);
+    }
+
 
 }

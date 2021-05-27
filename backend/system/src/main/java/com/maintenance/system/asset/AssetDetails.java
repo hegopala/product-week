@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,12 +49,25 @@ public class AssetDetails {
      *
      * @return returns list of asset health object
      */
-    public List<AssetHealth> getAssetHealthHistory() {
-        List<AssetHealth> assetHealthList = assetHealthRepository.findAll();
+    public List<AssetHealth> getAssetHealthHistory(Integer asset_id) {
+        List<AssetHealth> assetHealthList = assetHealthRepository.findByAssetId(asset_id);
         if (assetHealthList.size() == 0) {
             throw new NoSuchAssetFoundException();
         }
         return assetHealthList;
+    }
+
+    /**
+     * This method used for add the asset
+     *
+     * @param asset [Asset] (Integer asset_id, String asset_name, String asset_type, Integer asset_floor_id, Integer asset_department_id)
+     * @return returns the list of added assets
+     */
+    public List<Asset> addAsset(Asset asset) {
+        List<Asset> assetList = new ArrayList<>();
+        assetRepository.save(asset);
+        assetList.add(asset);
+        return assetList;
     }
 
 }

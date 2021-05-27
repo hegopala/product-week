@@ -3,8 +3,10 @@ package com.maintenance.system.controller;
 import com.maintenance.system.model.AssetHealth;
 import com.maintenance.system.service.AssetService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -21,22 +23,22 @@ public class AssetHealthController {
 
 
     /**
-     * This method gives the list of generated asset health
-     * @return returns the list of asset healthS
+     * This api add asset health
+     * @return returns the added list of asset health
      */
-    @PostMapping("/assetHealth")
+    @PostMapping("/addAssetHealth")
     public List<AssetHealth> generateAssetHealth(){
         return assetService.generateAssetHealth();
     }
 
     /**
-     * This method fetches the asset health history
+     * This api fetches the asset health history
      *
-     * @return list of asset health object
+     * @return list of asset health
      */
-    @GetMapping("/assetHealthHistory")
-    public List<AssetHealth> getAssetHealthHistory() {
-        return assetService.getAssetHealthHistory();
+    @GetMapping("/assetHealth")
+    public List<AssetHealth> getAssetHealthHistory(@RequestParam(value = "asset_id") Integer asset_id) {
+        return assetService.getAssetHealthHistory(asset_id);
 
     }
 }

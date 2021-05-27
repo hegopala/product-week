@@ -5,6 +5,8 @@ import com.maintenance.system.user.LoggedInUserDetails;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * This is UserService class
  *
@@ -33,6 +35,11 @@ public class UserService {
      */
     public boolean validateUser(User user) {
         return loggedInUserDetails.validateUser(user);
+    }
+
+
+    public List<User> registerUser(User user){
+        return loggedInUserDetails.registerUser(user);
     }
 
 

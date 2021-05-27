@@ -1,9 +1,9 @@
 package com.maintenance.system.service;
 
-import com.maintenance.system.model.Asset;
-import com.maintenance.system.model.AssetHealth;
 import com.maintenance.system.asset.AssetDetails;
 import com.maintenance.system.asset.AssetHealthGenerator;
+import com.maintenance.system.model.Asset;
+import com.maintenance.system.model.AssetHealth;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -34,6 +34,7 @@ public class AssetService {
 
     /**
      * This method uses for generate the asset health
+     *
      * @return returns the list of asset health
      */
     public List<AssetHealth> generateAssetHealth() {
@@ -45,7 +46,17 @@ public class AssetService {
      *
      * @return returns list of asset health object
      */
-    public List<AssetHealth> getAssetHealthHistory() {
-        return assetDetails.getAssetHealthHistory();
+    public List<AssetHealth> getAssetHealthHistory(Integer asset_id) {
+        return assetDetails.getAssetHealthHistory(asset_id);
+    }
+
+    /**
+     * This is service method used to add asset
+     *
+     * @param asset [Asset]
+     * @return returns the added asset
+     */
+    public List<Asset> addAsset(Asset asset) {
+        return assetDetails.addAsset(asset);
     }
 }

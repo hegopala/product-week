@@ -23,4 +23,5 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     @Query(value = "SELECT u.USER_PASSWORD FROM USER_PROFILE u WHERE u.EMAIL=?", nativeQuery = true)
     String findByEmail(@NonNull String email);
 
+
 }
