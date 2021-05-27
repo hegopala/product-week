@@ -2,7 +2,7 @@ import CustomString from "./CustomString";
 
 interface DropdownProps {
     name?: string,
-    options?: CustomString[]
+    options?: Array<CustomString | string>
 }
 
 export default DropdownProps;

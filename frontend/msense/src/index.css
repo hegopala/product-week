@@ -3,8 +3,5 @@
 body {
     margin: 0;
     padding: 0;
-}
-
-.product-heading {
-    color: cornflowerblue;
+    font-family: 'Roboto', 'sans-serif';
 }

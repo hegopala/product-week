@@ -16,13 +16,13 @@ const AssetListItem: React.FC<AssetListItemProps> = (props) => {
 const getClassNameList = (health?: number) => {
     if (health === undefined || health < 0) {
         // health is bad 
-        return "assetlistitem-container assetlistitem-bad";
+        return "assetlistitem-container assethealth-bad-background";
     } else if (health === 0) {
         // health is moderate
-        return "assetlistitem-container assetlistitem-moderate";
+        return "assetlistitem-container assethealth-moderate-background";
     }
     // health is good
-    return "assetlistitem-container assetlistitem-good";
+    return "assetlistitem-container assethealth-good-background";
 }
 
 export default AssetListItem;
