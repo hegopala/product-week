@@ -2,6 +2,7 @@ package com.maintenance.system.repository;
 
 
 import com.maintenance.system.model.User;
+import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -13,9 +14,13 @@ import org.springframework.stereotype.Repository;
  */
 
 @Repository
-public interface UserRepository  extends JpaRepository<User, Integer> {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-    @Query(value = "SELECT * FROM USER_PROFILE u where u.USER_STATUS = 'Y'", nativeQuery = true)
+    @Query(value = "SELECT * FROM USER_PROFILE u WHERE u.USER_STATUS = 'Y'", nativeQuery = true)
     public User getLoggedInUser();
+
+
+    @Query(value = "SELECT u.USER_PASSWORD FROM USER_PROFILE u WHERE u.EMAIL=?", nativeQuery = true)
+    String findByEmail(@NonNull String email);
 
 }

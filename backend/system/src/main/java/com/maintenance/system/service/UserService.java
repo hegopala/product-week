@@ -21,7 +21,19 @@ public class UserService {
      *
      * @return User object
      */
-    public User getUser() {
-        return loggedInUserDetails.getUserFromRepository();
+    public User getLoggedInUser() {
+        return loggedInUserDetails.getLoggedInUser();
     }
+
+    /**
+     * This service method is used for validate the user information
+     *
+     * @param user [User] object (String email,String password, Integer emp_id)
+     * @return return true in case of successful login or else false
+     */
+    public boolean validateUser(User user) {
+        return loggedInUserDetails.validateUser(user);
+    }
+
+
 }

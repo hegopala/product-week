@@ -10,6 +10,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+import java.util.regex.Pattern;
 
 /**
  * This class will provide the custom functions
@@ -87,5 +88,20 @@ public class CustomFunctions {
             log.error("[readProp] " + exception);
         }
         return map;
+    }
+
+    /**
+     * This method used to validate the email format
+     * @param email [String] email
+     * @return returns boolean, true in case of valid email format or else false
+     */
+    public static boolean isValidEmail(@NonNull String email)
+    {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\."+
+                "[a-zA-Z0-9_+&*-]+)*@" +
+                "(?:[a-zA-Z0-9-]+\\.)+[a-z" +
+                "A-Z]{2,7}$";
+        Pattern pat = Pattern.compile(emailRegex);
+        return pat.matcher(email).matches();
     }
 }

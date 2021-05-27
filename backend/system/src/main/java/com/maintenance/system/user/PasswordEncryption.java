@@ -1,11 +1,14 @@
 package com.maintenance.system.user;
 
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
  * This class used to encrypt the password
  * @author Gordhan Goyal
  */
+@Slf4j
 public class PasswordEncryption {
 
     /**
@@ -13,7 +16,7 @@ public class PasswordEncryption {
      * @param password [String] takes texted password
      * @return returns the encrypted password
      */
-    public static String encryptPassword(String password){
+    public static String encryptPassword(@NonNull String password){
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
@@ -23,7 +26,7 @@ public class PasswordEncryption {
      * @param hashed [String] takes the hashed password
      * @return returns true in case of password is same or else false
      */
-    public static boolean checkPassword(String password, String hashed){
+    public static boolean checkPassword(@NonNull String password, @NonNull String hashed){
         return BCrypt.checkpw(password, hashed);
     }
 
