@@ -11,4 +11,6 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface AssetHealthRepository extends JpaRepository<AssetHealth,Integer> {
+
+
 }

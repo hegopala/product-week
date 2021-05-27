@@ -1,10 +1,11 @@
-package com.maintenance.system.output;
+package com.maintenance.system.asset;
 
 import com.maintenance.system.model.AssetHealth;
 import com.maintenance.system.repository.AssetHealthRepository;
 import com.maintenance.system.util.CustomFunctions;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -18,26 +19,13 @@ import java.util.Map;
  * @author Gordhan Goyal
  */
 @Component
+@Slf4j
+@NoArgsConstructor
+@AllArgsConstructor
 public class AssetHealthGenerator {
-    private static final Logger log = LoggerFactory.getLogger(AssetHealthGenerator.class);
 
     @Autowired
     AssetHealthRepository assetHealthRepository;
-
-    /**
-     * non argument constructor
-     */
-    public AssetHealthGenerator() {
-    }
-
-    /**
-     * AssetHealthGenerator constructor
-     *
-     * @param assetHealthRepository AssetHealthRepository
-     */
-    public AssetHealthGenerator(AssetHealthRepository assetHealthRepository) {
-        this.assetHealthRepository = assetHealthRepository;
-    }
 
     /**
      * This method uses for generate the asset health
@@ -55,20 +43,21 @@ public class AssetHealthGenerator {
         int rows = cf.propValue(map, "result_set");
         while (count++ < rows) {
             try {
-                // take min and max from properties file
-                AssetHealth assetHealth = new AssetHealth(
-                        CustomFunctions.random(cf.propValue(map, "min_asset"), cf.propValue(map, "max_asset")),
-                        CustomFunctions.random(cf.propValue(map, "min_velocity"), cf.propValue(map, "max_velocity")),
-                        CustomFunctions.random(cf.propValue(map, "min_pressure"), cf.propValue(map, "max_pressure")),
-                        CustomFunctions.currentDateTime());
+                AssetHealth assetHealth = AssetHealth.builder()
+                        .asset_id(CustomFunctions.random(cf.propValue(map, "min_asset"), cf.propValue(map, "max_asset")))
+                        .velocity_value(CustomFunctions.random(cf.propValue(map, "min_velocity"), cf.propValue(map, "max_velocity")))
+                        .pressure_value(CustomFunctions.random(cf.propValue(map, "min_pressure"), cf.propValue(map, "max_pressure")))
+                        .health_timestamp(CustomFunctions.currentDateTime())
+                        .build();
+
                 assetHealthRepository.save(assetHealth);
                 healthList.add(assetHealth);
+
             } catch (Exception e) {
                 log.error("[AssetHealthGenerator] [generateAssetHealth] " + e);
             }
         }
         return healthList;
     }
-
 
 }

@@ -1,8 +1,8 @@
 package com.maintenance.system.util;
 
 import com.maintenance.system.exception.AssetHealthPropNotFoundException;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,17 +16,18 @@ import java.util.*;
  *
  * @author Gordhan Goyal
  */
+@Slf4j
 public class CustomFunctions {
-    private static final Logger log = LoggerFactory.getLogger(CustomFunctions.class);
+
 
     /**
      * This method generates the random health for asset example- asset id, velocity, pressure
      *
      * @param min [Integer] takes the minimum number
      * @param max [Integer] takes the maximum number
-     * @return returns the random integer.
+     * @return returns the random integer
      */
-    public static int random(int min, int max) {
+    public static int random(@NonNull int min, @NonNull int max) {
         return (int) (Math.random() * (max - min + 1) + min);
     }
 
@@ -38,9 +39,7 @@ public class CustomFunctions {
     public static Date currentDateTime() {
         try {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            Calendar calObj = Calendar.getInstance();
-            df.format(calObj.getTime());
-            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(df.format(calObj.getTime()));
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(df.format(Calendar.getInstance().getTime()));
         } catch (ParseException e) {
             log.error("[AssetHealthGenerator] [currentDateTime] " + e);
         }
@@ -54,7 +53,7 @@ public class CustomFunctions {
      * @param key takes key from map
      * @return returns the Integer value of provided key
      */
-    public Integer propValue(Map<String, Integer> map, String key) {
+    public Integer propValue(@NonNull Map<String, Integer> map, @NonNull String key) {
         return map.get(key);
     }
 
@@ -64,7 +63,7 @@ public class CustomFunctions {
      * @param fileName [String] name of the property file
      * @return returns the [Map<String,Integer>] from the property file
      */
-    public Map<String, Integer> readProp(String fileName) {
+    public Map<String, Integer> readProp(@NonNull String fileName) {
         Map<String, Integer> map = new HashMap<>();
         InputStream inputStream;
         try {

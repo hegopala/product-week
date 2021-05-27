@@ -2,8 +2,8 @@ package com.maintenance.system.service;
 
 import com.maintenance.system.model.Asset;
 import com.maintenance.system.model.AssetHealth;
-import com.maintenance.system.output.AllAssetDetails;
-import com.maintenance.system.output.AssetHealthGenerator;
+import com.maintenance.system.asset.AssetDetails;
+import com.maintenance.system.asset.AssetHealthGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class AssetService {
     @Autowired
-    AllAssetDetails allAssetDetails;
+    AssetDetails assetDetails;
 
     @Autowired
     AssetHealthGenerator assetHealthGenerator;
@@ -29,7 +29,7 @@ public class AssetService {
      * @return list of all assets
      */
     public List<Asset> getAllAssets() {
-        return allAssetDetails.getAllAssets();
+        return assetDetails.getAllAssets();
     }
 
     /**
@@ -38,5 +38,14 @@ public class AssetService {
      */
     public List<AssetHealth> generateAssetHealth() {
         return assetHealthGenerator.generateAssetHealth();
+    }
+
+    /**
+     * This method fetch the asset health history from repository
+     *
+     * @return returns list of asset health object
+     */
+    public List<AssetHealth> getAssetHealthHistory() {
+        return assetDetails.getAssetHealthHistory();
     }
 }

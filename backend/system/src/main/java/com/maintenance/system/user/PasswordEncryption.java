@@ -13,7 +13,7 @@ public class PasswordEncryption {
      * @param password [String] takes texted password
      * @return returns the encrypted password
      */
-    public String encryptPassword(String password){
+    public static String encryptPassword(String password){
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
@@ -23,7 +23,7 @@ public class PasswordEncryption {
      * @param hashed [String] takes the hashed password
      * @return returns true in case of password is same or else false
      */
-    public boolean checkPassword(String password, String hashed){
+    public static boolean checkPassword(String password, String hashed){
         return BCrypt.checkpw(password, hashed);
     }
 
