@@ -1,54 +1,42 @@
 package com.maintenance.system.service;
 
-import com.maintenance.system.asset.AssetDetails;
-import com.maintenance.system.asset.AssetHealthGenerator;
+
+import com.maintenance.system.exception.NoSuchAssetFoundException;
+import com.maintenance.system.job.AssetHealthJob;
 import com.maintenance.system.model.Asset;
-import com.maintenance.system.model.AssetHealth;
+import com.maintenance.system.repository.AssetRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
- * This is service class to get all asset information
+ * This is service class to get all asset information and asset health
  *
  * @author Gordhan Goyal
  */
 
 @Service
+@Slf4j
 public class AssetService {
-    @Autowired
-    AssetDetails assetDetails;
 
     @Autowired
-    AssetHealthGenerator assetHealthGenerator;
+    AssetRepository assetRepository;
+
 
     /**
      * This service method is for get all assets
      *
-     * @return list of all assets
+     * @return list of all assets , throws NoSuchAssetFoundException exception in case of empty list
      */
     public List<Asset> getAllAssets() {
-        return assetDetails.getAllAssets();
+        List<Asset> assetList = assetRepository.findAll();
+        if (assetList.size() == 0) throw new NoSuchAssetFoundException();
+        return assetList;
     }
 
-    /**
-     * This method uses for generate the asset health
-     *
-     * @return returns the list of asset health
-     */
-    public List<AssetHealth> generateAssetHealth() {
-        return assetHealthGenerator.generateAssetHealth();
-    }
-
-    /**
-     * This method fetch the asset health history from repository
-     *
-     * @return returns list of asset health object
-     */
-    public List<AssetHealth> getAssetHealthHistory(Integer asset_id) {
-        return assetDetails.getAssetHealthHistory(asset_id);
-    }
 
     /**
      * This is service method used to add asset
@@ -57,6 +45,15 @@ public class AssetService {
      * @return returns the added asset
      */
     public List<Asset> addAsset(Asset asset) {
-        return assetDetails.addAsset(asset);
+        List<Asset> assetList = new ArrayList<>();
+        try {
+            assetRepository.save(asset);
+            assetList.add(asset);
+        } catch (Exception e) {
+            log.error("[Failed to add asset !!! ] " + e);
+        }
+        return assetList;
     }
+
+
 }

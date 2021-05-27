@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 /**
  * This is Error advice controller
  *
- * @author Sunil, Goyal, Brijesh
+ * @author Sunil, Gordhan Goyal, Brijesh
  */
 
 @ControllerAdvice
@@ -59,11 +59,33 @@ public class ErrorControllerAdvice {
 
     /**
      * This is used for throw InvalidEmailFormatException in case of incorrect email
+     *
      * @param invalidEmailFormatException [InvalidEmailFormatException]
      */
     @ExceptionHandler(value = InvalidEmailFormatException.class)
     public void exception(InvalidEmailFormatException invalidEmailFormatException) {
         log.error("Invalid Email Exception !!! " + invalidEmailFormatException);
+    }
+
+    /**
+     * This is used for throw UserRegistrationException in case of failed registration
+     *
+     * @param userRegistrationException [UserRegistrationException]
+     */
+    @ExceptionHandler(value = UserRegistrationException.class)
+    public void exception(UserRegistrationException userRegistrationException) {
+        log.error("[User Registration Failed !!!! ] " + userRegistrationException);
+    }
+
+
+    /**
+     * This is used for throw FailedToAddAssetHealthException in case of failed add asset health
+     *
+     * @param failedToAddAssetHealthException [FailedToAddAssetHealthException]
+     */
+    @ExceptionHandler(value = FailedToAddAssetHealthException.class)
+    public void exception(FailedToAddAssetHealthException failedToAddAssetHealthException) {
+        log.error("[Failed to add asset health !!!! ] " + failedToAddAssetHealthException);
     }
 
 

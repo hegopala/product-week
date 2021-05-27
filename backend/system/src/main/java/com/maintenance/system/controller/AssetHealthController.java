@@ -1,44 +1,44 @@
 package com.maintenance.system.controller;
 
 import com.maintenance.system.model.AssetHealth;
-import com.maintenance.system.service.AssetService;
+import com.maintenance.system.service.AssetHealthService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 /**
  * This is controller which will generate the asset health
+ *
  * @author Gordhan Goyal ,Sunil Hansda
  */
 @RestController
+@RequestMapping("/assetHealth")
 public class AssetHealthController {
 
     @Autowired
-    AssetService assetService;
-
+    AssetHealthService assetHealthService;
 
     /**
-     * This api add asset health
-     * @return returns the added list of asset health
+     * This api will use for the add the asset health
+     *
+     * @param assetHealth [AssetHealth]
+     * @return returns the list of added health
      */
-    @PostMapping("/addAssetHealth")
-    public List<AssetHealth> generateAssetHealth(){
-        return assetService.generateAssetHealth();
+    @PostMapping("/add")
+    public List<AssetHealth> insertAssetHealth(@RequestBody AssetHealth assetHealth) {
+        return assetHealthService.saveAssetHealth(assetHealth);
     }
 
     /**
      * This api fetches the asset health history
      *
+     * @param asset_id takes asset_id for the health
      * @return list of asset health
      */
-    @GetMapping("/assetHealth")
-    public List<AssetHealth> getAssetHealthHistory(@RequestParam(value = "asset_id") Integer asset_id) {
-        return assetService.getAssetHealthHistory(asset_id);
+    @GetMapping("/getHealth")
+    public List<AssetHealth> getAssetHealthHistory(@RequestParam(value = "asset-id") Integer asset_id) {
+        return assetHealthService.getAssetHealthHistory(asset_id);
 
     }
 }

@@ -8,7 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 /**
- * This is User class
+ * This is LoginUser class
  *
  * @author Sunil Hansda
  */
@@ -19,6 +19,7 @@ import javax.persistence.Table;
 @ToString
 @Getter
 @Setter
+@Builder
 public class User {
 
     @Id
@@ -28,10 +29,13 @@ public class User {
     @Column(name = "EMAIL")
     private String email;
 
-    @Column(name = "USER_PASSWORD")
+    @Column(name = "EMP_PASSWORD")
     private String password;
 
-    @Column(name = "USER_STATUS")
+    @Column(name = "EMP_STATUS")
     private String user_status;
+
+    @Column(name = "CONTACT_NUMBER")
+    private long contactNumber;
 
 }

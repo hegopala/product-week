@@ -16,12 +16,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, Integer> {
 
-    @Query(value = "SELECT * FROM USER_PROFILE u WHERE u.USER_STATUS = 'Y'", nativeQuery = true)
+    @Query(value = "SELECT * FROM USER_PROFILE u WHERE u.EMP_STATUS = 'Y'", nativeQuery = true)
     public User getLoggedInUser();
 
 
-    @Query(value = "SELECT u.USER_PASSWORD FROM USER_PROFILE u WHERE u.EMAIL=?", nativeQuery = true)
-    String findByEmail(@NonNull String email);
+    @Query(value = "SELECT u.EMP_PASSWORD FROM USER_PROFILE u WHERE u.EMAIL=?", nativeQuery = true)
+    public String findByEmail(@NonNull String email);
 
 
 }

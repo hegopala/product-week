@@ -1,22 +1,19 @@
 package com.maintenance.system.controller;
 
 import com.maintenance.system.model.User;
+import com.maintenance.system.model.RegisterUser;
 import com.maintenance.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.*;
 
 /**
- * This is controller which fetches the logged in user data from database
+ * This is controller for register the user, validate the user and display the logged in user details
  *
- * @author Sunil Hansda, Brijesh
+ * @author Sunil Hansda, Brijesh, Gordhan Goyal
  */
 
 @RestController
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -33,25 +30,34 @@ public class UserController {
     }
 
     /**
-     * This api is responsible for the user login validation
+     * This api is responsible for the user validation
      *
-     * @param user User object(String email, String password, Integer emp_id)
-     * @return return true in case of successful login or else false
+     * @param user LoginUser object(String email, String password, Integer emp_id)
+     * @return return success in case of successful validation or else failed
      */
-    @PostMapping("/user/login")
-    public boolean validateUser(@RequestBody User user) {
-        return userService.validateUser(user);
+    @PostMapping("/validateUser")
+    public String validateUser(@RequestBody User user) {
+
+        if (userService.validateUser(user)) {
+            return "User Validation Successful";
+        } else {
+            return "User Validation Failed";
+        }
     }
 
     /**
      * This api will help to register the new user
      *
-     * @param user [user] user details (Integer emp_id, String email, String password)
-     * @return returns the list of registered user
+     * @param registerUser [RegisterUser]
+     * @return returns the Success of registered user or else failed
      */
-    @PostMapping("/user/register")
-    public List<User> registerUser(@RequestBody User user) {
-        return userService.registerUser(user);
+    @PostMapping("/register")
+    public String registerUser(@RequestBody RegisterUser registerUser) {
+        if (userService.registerUser(registerUser)) {
+            return "Registration Successful";
+        } else {
+            return "Registration Failed";
+        }
     }
 
 }
