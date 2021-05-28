@@ -1,18 +1,20 @@
 import { FormControl, Input, InputLabel, NativeSelect } from '@material-ui/core';
 import React from "react";
-import FormSlideProps from '../../../model/FormSlideProp';
+import FormSlideProps from '../../../model/props/FormSlideProp';
+import SecurityQuestionDetail from '../../../model/SecurityQuestionDetail';
 
 const SecurityQuestion: React.FC<FormSlideProps> = (props) => {
-    const securityQuestionDetail: { [key: string]: string } = {};
+    const securityQuestionDetail = props.value ? props.value as SecurityQuestionDetail : new SecurityQuestionDetail();
+
+    const [isQuestionFieldDirty, setQuestionFieldDirty] = React.useState(false);
+    const [isAnswerFieldDirty, setAnswerFieldDirty] = React.useState(false);
+
+    const setFormDirtyness = (property: string) => (property.match("question") && setQuestionFieldDirty(true)) || (property.match("answer") && setAnswerFieldDirty(true));
 
     const onInputChange = (event: (React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement | HTMLSelectElement>)) => {
-        securityQuestionDetail[event.target.id] = event.target.value;
-        props.onDataValidationStateChange?.(validateSecurityQuestionDetail(securityQuestionDetail));
-        props.onDataChange?.(securityQuestionDetail);
-    }
-
-    const validateSecurityQuestionDetail = (detail:{ [key: string]: string }) => {
-        return true;
+        setFormDirtyness(event.target.id);
+        securityQuestionDetail.set(event.target.id, event.target.value);
+        props.onDataChange?.(securityQuestionDetail.clone());
     }
 
     const options = [{
@@ -26,10 +28,10 @@ const SecurityQuestion: React.FC<FormSlideProps> = (props) => {
     return (
         <div className="register-slide">
             <h3>Security Question</h3>
-            <FormControl fullWidth={true} required={true}>
+            <FormControl fullWidth={true} required={true} error={isQuestionFieldDirty && !securityQuestionDetail.isQuestionValid()}>
                 <InputLabel id="security-question-label" htmlFor="security-question">Security question</InputLabel>
                 <NativeSelect
-                    value={props.value ? props.value["security-question"] : ""}
+                    value={securityQuestionDetail.getQuestion()}
                     onChange={event => onInputChange(event)}
                     id="security-question"
                     input={<Input />}>
@@ -37,9 +39,9 @@ const SecurityQuestion: React.FC<FormSlideProps> = (props) => {
                     {options.map(option => (<option key={option.value} value={option.value}>{option.text}</option>))}
                 </NativeSelect>
             </FormControl>
-            <FormControl fullWidth={true} required={true}>
+            <FormControl fullWidth={true} required={true} error={isAnswerFieldDirty && !securityQuestionDetail.isAnswerValid()}>
                 <InputLabel htmlFor="security-answer">Answer</InputLabel>
-                <Input value={props.value ? props.value["security-answer"] : ""} onChange={event => onInputChange(event)} id="security-answer" type="text" autoComplete="off" />
+                <Input value={securityQuestionDetail.getAnswer()} onChange={event => onInputChange(event)} id="security-answer" type="text" autoComplete="off" />
             </FormControl>
             <FormControl fullWidth={true} style={{ visibility: "hidden" }}>
                 <InputLabel htmlFor="security-hidden">Hidden</InputLabel>

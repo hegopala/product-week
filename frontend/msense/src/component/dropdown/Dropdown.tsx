@@ -1,9 +1,9 @@
 import React from 'react';
-import DropdownProps from '../../model/DropdownProp';
+import DropdownProps from '../../model/props/DropdownProp';
 
 import './dropdown.css';
 import DownArrowImage from './../../assets/svg/down-arrow.svg';
-import CustomString from '../../model/CustomString';
+import CustomString from '../../model/interface/CustomString';
 
 const Dropdown: React.FC<DropdownProps> = (props) => {
 

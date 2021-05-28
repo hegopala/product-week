@@ -1,55 +1,54 @@
-import { Button, FormControl, Input, InputLabel, Link as LinkUI } from '@material-ui/core';
+import { Button, Link as LinkUI } from '@material-ui/core';
 import React from 'react';
+import { Link } from 'react-router-dom';
+import EmployeeDetail from '../../model/EmployeeDetail';
+import FactoryDetail from '../../model/FactoryDetail';
+import PasswordDetail from '../../model/PasswordDetail';
+import SecurityQuestionDetail from '../../model/SecurityQuestionDetail';
 import Employee from './employee/Employee';
 import Factory from './factory/Factory';
+import Password from './password/Password';
 import './register.css';
 import SecurityQuestion from './securityquestion/SecurityQuestion';
 
+
 const Register: React.FC = () => {
 
-    let factoryDetail: { [key: string]: string } = {};
-    let employeeDetail: { [key: string]: string } = {};
-    let securityQuestionDetail: { [key: string]: string } = {};
-
-    let isFactoryDetailValid = false;
-    let isEmployeeDetailValid = false;
-    let isSecurityQuestionDetailValid = false;
-
-    const onFactoryDetailChange = (detail: { [key: string]: string }) => factoryDetail = detail;
-    const onEmployeeDetailChange = (detail: { [key: string]: string }) => employeeDetail = detail;
-    const onSecurityQuestionDetailChange = (detail: { [key: string]: string }) => securityQuestionDetail = detail;
-
-    const onFactoryDatailValidationStateChange = (valid: boolean) => isFactoryDetailValid = valid;
-    const onEmployeeyDatailValidationStateChange = (valid: boolean) => isEmployeeDetailValid = valid;
-    const onSecurityQuestionDatailValidationStateChange = (valid: boolean) => isSecurityQuestionDetailValid = valid;
-
-    const slides = [
-        <Factory value={factoryDetail} onDataChange={onFactoryDetailChange} onDataValidationStateChange={onFactoryDatailValidationStateChange} />,
-        <Employee value={employeeDetail} onDataChange={onEmployeeDetailChange} onDataValidationStateChange={onEmployeeyDatailValidationStateChange} />,
-        <SecurityQuestion value={securityQuestionDetail} onDataChange={onSecurityQuestionDetailChange} onDataValidationStateChange={onSecurityQuestionDatailValidationStateChange} />,
-        getPasswordSlide()
-    ];
+    const [factoryDetail, setFactoryDetail] = React.useState<FactoryDetail>();
+    const [employeeDetail, setEmployeeDetail] = React.useState<EmployeeDetail>();
+    const [securityQuestionDetail, setSecurityQuestionDetail] = React.useState<SecurityQuestionDetail>();
+    const [passwordDetail, setPasswordDetail] = React.useState<PasswordDetail>();
 
     const [visibleSlide, setVisibleSlide] = React.useState(0);
 
-    const validateCurrentSlide = () => {
+    const onDetailDataChange = (detail: (FactoryDetail | EmployeeDetail | SecurityQuestionDetail | PasswordDetail)) => ((detail instanceof FactoryDetail) && setFactoryDetail(detail)) || ((detail instanceof EmployeeDetail) && setEmployeeDetail(detail)) || ((detail instanceof SecurityQuestionDetail) && setSecurityQuestionDetail(detail)) || ((detail instanceof PasswordDetail) && setPasswordDetail(detail));
+
+    const slides = [
+        <Factory value={factoryDetail} onDataChange={onDetailDataChange} />,
+        <Employee value={employeeDetail} onDataChange={onDetailDataChange} />,
+        <SecurityQuestion value={securityQuestionDetail} onDataChange={onDetailDataChange} />,
+        <Password value={passwordDetail} onDataChange={onDetailDataChange} />
+    ];
+
+    const validateCurrentSlide = (): boolean => {
         switch (visibleSlide) {
-            case 0: return isFactoryDetailValid;
-            case 1: return isEmployeeDetailValid;
-            case 2: return isSecurityQuestionDetailValid;
+            case 0: return factoryDetail ? factoryDetail.isValid() : false;
+            case 1: return employeeDetail ? employeeDetail.isValid() : false;
+            case 2: return securityQuestionDetail ? securityQuestionDetail.isValid() : false;
+            case 3: return passwordDetail ? passwordDetail.isValid() : false;
             default: return true;
         }
     }
 
-    const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-        console.log(factoryDetail, employeeDetail, securityQuestionDetail);
-        if(!(isEmployeeDetailValid && isFactoryDetailValid && isSecurityQuestionDetailValid)) {
+    const onFormSubmit = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+        if (!(factoryDetail?.isValid() && employeeDetail?.isIdValid && securityQuestionDetail?.isValid() && passwordDetail?.isValid())) {
             event.preventDefault();
         }
     }
 
     const onBackButtonClick = () => visibleSlide > 0 && setVisibleSlide(visibleSlide - 1);
     const onNextButtonClick = () => visibleSlide < slides.length - 1 && validateCurrentSlide() && setVisibleSlide(visibleSlide + 1);
+
     const isFirstSlide = () => visibleSlide === 0;
     const isLastSlide = () => visibleSlide === slides.length - 1;
 
@@ -57,7 +56,7 @@ const Register: React.FC = () => {
         <div className="register">
             <div className="register-form-wrapper">
                 <h1 className="product-heading">MSense</h1>
-                <form action="/dashboard" className="register-form" onSubmit={event => onFormSubmit(event)}>
+                <div className="register-form">
                     {slides[visibleSlide]}
                     <div className="register-controls">
                         {
@@ -67,33 +66,13 @@ const Register: React.FC = () => {
                         }
                         {
                             isLastSlide() ?
-                                (<Button onClick={() => onNextButtonClick()} variant="contained" color="primary" type="submit">Submit</Button>) :
+                                (<Link to="/dashboard" onClick={event => onFormSubmit(event)}><Button variant="contained" color="primary" type="button">Submit</Button></Link>) :
                                 (<Button onClick={() => onNextButtonClick()} variant="contained" color="primary" type="button">Next</Button>)
                         }
                     </div>
-                </form>
+                </div>
             </div>
         </div >
-    );
-}
-
-const getPasswordSlide = () => {
-    return (
-        <div className="register-slide">
-            <h3>User Password</h3>
-            <FormControl fullWidth={true} required={true}>
-                <InputLabel htmlFor="password-main">Password</InputLabel>
-                <Input id="password-main" type="text" autoComplete="off" />
-            </FormControl>
-            <FormControl fullWidth={true} required={true}>
-                <InputLabel htmlFor="password-reenter">Re-enter password</InputLabel>
-                <Input id="password-reenter" type="text" autoComplete="off" />
-            </FormControl>
-            <FormControl fullWidth={true} style={{ visibility: "hidden" }}>
-                <InputLabel htmlFor="security-hidden">Hidden</InputLabel>
-                <Input id="security-hidden" type="text" disabled autoComplete="off" />
-            </FormControl>
-        </div>
     );
 }
 

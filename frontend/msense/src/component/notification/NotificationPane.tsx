@@ -1,4 +1,4 @@
-import NotificationProps from "../../model/NotificationProp";
+import NotificationProps from "../../model/props/NotificationProp";
 import { randomIntFromInterval } from "../../util/NumUtils";
 import Dropdown from "../dropdown/Dropdown";
 import NotificationItem from "../notificationitem/NotificationItem";

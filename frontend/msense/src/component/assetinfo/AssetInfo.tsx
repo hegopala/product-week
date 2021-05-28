@@ -1,5 +1,5 @@
 import React from "react";
-import AssetInfoProps from "../../model/AssetInfoProp";
+import AssetInfoProps from "../../model/props/AssetInfoProp";
 import AssetHistory from "../assethistory/AssetHistory";
 import AssetInfoItem from "../assetinfoitem/AssetInfoItem";
 import AssetLiveHealth from "../assetlivehealth/AssetLiveHealth";

@@ -1,4 +1,5 @@
-import CustomString from "./CustomString";
+import CustomString from "../interface/CustomString";
+
 
 interface DropdownProps {
     name?: string,

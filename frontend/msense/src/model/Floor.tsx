@@ -1,5 +1,5 @@
 import { numToOrdinalForm } from "../util/NumUtils";
-import CustomString from "./CustomString";
+import CustomString from "./interface/CustomString";
 
 class Floor implements CustomString{
     toString = () => `${numToOrdinalForm(this.num)} Floor`;

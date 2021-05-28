@@ -1,7 +1,6 @@
-import { FormControl, Input, InputLabel, NativeSelect } from "@material-ui/core";
-import { ArrowDropDown } from "@material-ui/icons";
+import { FormControl, Input, NativeSelect } from "@material-ui/core";
 import React from "react";
-import { LineChart, XAxis, YAxis, CartesianGrid, Line, Tooltip, ResponsiveContainer } from "recharts";
+import { Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from "recharts";
 import "./assethistoryitem.css";
 
 interface AssetHistoryItemProps {

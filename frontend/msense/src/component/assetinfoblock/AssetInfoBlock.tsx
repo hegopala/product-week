@@ -1,4 +1,4 @@
-import AssetInfoBlockProps from '../../model/AssetInfoBlockProp';
+import AssetInfoBlockProps from '../../model/props/AssetInfoBlockProp';
 import './assetinfoblock.css'
 import MachineImage from './../../assets/svg/machine.svg';
 

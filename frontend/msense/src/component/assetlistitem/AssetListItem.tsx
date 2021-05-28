@@ -1,4 +1,4 @@
-import AssetListItemProps from "../../model/AssetListItemProp";
+import AssetListItemProps from "../../model/props/AssetListItemProp";
 import './assetlistitem.css'
 import MachineImage from './../../assets/svg/machine.svg';
 import { Link } from "react-router-dom";

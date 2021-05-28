@@ -1,4 +1,4 @@
-import AssetInfoItemProps from '../../model/AssetInfoItemProp';
+import AssetInfoItemProps from '../../model/props/AssetInfoItemProp';
 import './assetinfoitem.css';
 
 const AssetInfoItem: React.FC<AssetInfoItemProps> = (props) => {

@@ -1,7 +1,7 @@
 import './header.css';
 import NotificationImage from './../../assets/svg/notification.svg'; 
 import ProfileImage from './../../assets/svg/profile.svg';
-import HeaderProps from '../../model/HeaderProp';
+import HeaderProps from '../../model/props/HeaderProp';
 
 const Header: React.FC<HeaderProps> = (props) => {
     return (

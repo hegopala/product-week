@@ -1,4 +1,4 @@
-import NotificationProps from '../../model/NotificationItemProp';
+import NotificationProps from '../../model/props/NotificationItemProp';
 import './notificationitem.css';
 
 const NotificationItem: React.FC<NotificationProps> = (props) => {
