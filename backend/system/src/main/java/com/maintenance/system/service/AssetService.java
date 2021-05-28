@@ -1,54 +1,60 @@
 package com.maintenance.system.service;
 
+
+import java.util.ArrayList;
+import java.util.List;
+
+import com.maintenance.system.exception.NoSuchAssetFoundException;
 import com.maintenance.system.model.Asset;
-import com.maintenance.system.model.AssetHealth;
-import com.maintenance.system.output.AllAssetDetails;
-import com.maintenance.system.output.AssetHealthGenerator;
+import com.maintenance.system.repository.AssetRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import lombok.extern.slf4j.Slf4j;
 
 /**
- * This is service class to get all asset information
+ * This is service class to get all asset information and asset health
  *
  * @author Gordhan Goyal
  */
 
 @Service
+@Slf4j
 public class AssetService {
-    @Autowired
-    AllAssetDetails allAssetDetails;
 
     @Autowired
-    AssetHealthGenerator assetHealthGenerator;
+    AssetRepository assetRepository;
+
 
     /**
      * This service method is for get all assets
      *
-     * @return list of all assets
+     * @return list of all assets , throws NoSuchAssetFoundException exception in case of empty list
      */
     public List<Asset> getAllAssets() {
-        return allAssetDetails.getAllAssets();
-    }
-
-    /**
-     * This method uses for generate the asset health
-     *
-     * @return returns the list of asset health
-     */
-    public List<AssetHealth> generateAssetHealth() {
-        return assetHealthGenerator.generateAssetHealth();
+        List<Asset> assetList = assetRepository.findAll();
+        if (assetList.size() == 0) throw new NoSuchAssetFoundException();
+        return assetList;
     }
 
 
     /**
-     * This method fetch the asset health history from repository
+     * This is service method used to add asset
      *
-     * @return returns list of asset health object
+     * @param asset [Asset]
+     * @return returns the added asset
      */
-    public List<AssetHealth> getAssetHealthHistory() {
-        return allAssetDetails.getAssetHealthHistory();
+    public List<Asset> addAsset(Asset asset) {
+        List<Asset> assetList = new ArrayList<>();
+        try {
+            assetRepository.save(asset);
+            assetList.add(asset);
+        } catch (Exception e) {
+            log.error("[Failed to add asset !!! ] " + e);
+        }
+        return assetList;
     }
+
 
 }

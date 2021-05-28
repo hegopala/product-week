@@ -1,63 +1,41 @@
 package com.maintenance.system.model;
 
+import lombok.*;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 /**
- * This is User class
+ * This is LoginUser class
  *
  * @author Sunil Hansda
  */
-
 @Entity
-@Table
+@Table(name = "USER_PROFILE")
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
+@Getter
+@Setter
+@Builder
 public class User {
 
     @Id
-    private int empId;
+    @Column(name = "EMP_ID")
+    private Integer empId;
+
+    @Column(name = "EMAIL")
     private String email;
+
+    @Column(name = "EMP_PASSWORD")
     private String password;
 
-    public User(){}
+    @Column(name = "EMP_STATUS")
+    private String user_status;
 
-    public User(int empId, String email, String password) {
-        this.empId = empId;
-        this.email = email;
-        this.password = password;
-    }
+    @Column(name = "CONTACT_NUMBER")
+    private long contactNumber;
 
-    public int getEmpId() {
-        return empId;
-    }
-
-    public void setEmpId(int empId) {
-        this.empId = empId;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "empId=" + empId +
-                ", email='" + email + '\'' +
-                ", password='" + password + '\'' +
-                '}';
-    }
 }
