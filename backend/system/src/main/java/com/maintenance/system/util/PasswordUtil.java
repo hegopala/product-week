@@ -1,15 +1,14 @@
 package com.maintenance.system.util;
 
-import lombok.NonNull;
-import lombok.extern.slf4j.Slf4j;
 import org.mindrot.jbcrypt.BCrypt;
+
+import lombok.NonNull;
 
 /**
  * This class used to encrypt the password
  *
  * @author Gordhan Goyal
  */
-@Slf4j
 public class PasswordUtil {
 
     /**
