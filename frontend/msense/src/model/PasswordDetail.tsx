@@ -2,8 +2,8 @@ import Cloneable from "./interface/Cloneable";
 import Validatable from "./interface/Validatable";
 
 class PasswordDetail implements Cloneable, Validatable {
-    main: string;
-    confirm: string;
+    private main: string;
+    private confirm: string;
 
     constructor(main?: string, confirm?: string) {
         this.main = main || "";

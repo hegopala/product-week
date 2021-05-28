@@ -2,8 +2,8 @@ import Cloneable from "./interface/Cloneable";
 import Validatable from "./interface/Validatable";
 
 class SecurityQuestionDetail implements Cloneable, Validatable {
-    question: string;
-    answer: string;
+    private question: string;
+    private answer: string;
 
     constructor(question?: string, answer?: string) {
         this.question = question || "";

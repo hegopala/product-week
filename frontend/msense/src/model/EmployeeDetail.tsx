@@ -3,9 +3,9 @@ import Cloneable from "./interface/Cloneable";
 import Validatable from "./interface/Validatable";
 
 class EmployeeDetail implements Cloneable, Validatable {
-    id: string;
-    email: string;
-    contact: string;
+    private id: string;
+    private email: string;
+    private contact: string;
 
     constructor(id?: string, email?: string, contact?: string) {
         this.id = id || "";

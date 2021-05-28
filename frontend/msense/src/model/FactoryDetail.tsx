@@ -2,9 +2,9 @@ import Cloneable from "./interface/Cloneable";
 import Validatable from "./interface/Validatable";
 
 class FactoryDetail implements Cloneable, Validatable {
-    name: string;
-    location: string;
-    type: string;
+    private name: string;
+    private location: string;
+    private type: string;
 
     constructor(name?: string, location?: string, type?: string) {
         this.name = name || "";
