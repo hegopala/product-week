@@ -1,4 +1,5 @@
 import React from 'react';
+import AuthStateProps from '../../model/props/AuthStateProp';
 import AssetList from '../assetlist/AssetList';
 import AssetStateInfo from '../assetstateinfo/AssetStateInfo';
 import Filter from '../filter/Filter';
@@ -7,13 +8,13 @@ import NotificationPane from '../notification/NotificationPane';
 import './dashboard.css';
 
 
-const Dashboard: React.FC = () => {
+const Dashboard: React.FC<AuthStateProps> = (props) => {
   const [isNotificationPaneVisible, setNotificationPaneVisiblity] = React.useState(false);
 
   return (
     <div className="dashboard container">
       <div className="header-container dashboard-item">
-        <Header notificationClickAction={() => setNotificationPaneVisiblity(!isNotificationPaneVisible)} />
+        <Header onAuthenticationStateChange={props.onAuthenticationStateChange} notificationClickAction={() => setNotificationPaneVisiblity(!isNotificationPaneVisible)} />
       </div>
       <div className="filter-container dashboard-item">
         <Filter />

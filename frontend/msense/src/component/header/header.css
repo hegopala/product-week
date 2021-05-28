@@ -2,12 +2,12 @@
     display: flex;
     justify-content: flex-end;
     align-items: center;
+    margin: 0 10px;
 }
 
 .header-img {
     max-width: 30px;
     cursor: pointer;
-
 }
 
 .header-text {

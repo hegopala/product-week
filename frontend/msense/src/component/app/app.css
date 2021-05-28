@@ -38,6 +38,10 @@
     width: 70%;
 }
 
+.clickable {
+    cursor: pointer;
+}
+
 @media only screen and (max-width: 1078px) {
     .container {
         width: 100%;

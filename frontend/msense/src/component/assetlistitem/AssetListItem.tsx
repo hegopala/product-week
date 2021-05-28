@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 
 const AssetListItem: React.FC<AssetListItemProps> = (props) => {
     return (
-        <Link to={`/dashboard/asset/${props.data}`}>
+        <Link to={`/asset/${props.data}`}>
             <div className={getClassNameList(props.health)}>
                 <img src={MachineImage} width="50px" alt="Asset" />
             </div>

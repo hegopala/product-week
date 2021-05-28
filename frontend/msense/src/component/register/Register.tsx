@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import EmployeeDetail from '../../model/EmployeeDetail';
 import FactoryDetail from '../../model/FactoryDetail';
 import PasswordDetail from '../../model/PasswordDetail';
+import AuthStateProps from '../../model/props/AuthStateProp';
 import SecurityQuestionDetail from '../../model/SecurityQuestionDetail';
 import Employee from './employee/Employee';
 import Factory from './factory/Factory';
@@ -12,7 +13,7 @@ import './register.css';
 import SecurityQuestion from './securityquestion/SecurityQuestion';
 
 
-const Register: React.FC = () => {
+const Register: React.FC<AuthStateProps> = (props) => {
 
     const [factoryDetail, setFactoryDetail] = React.useState<FactoryDetail>();
     const [employeeDetail, setEmployeeDetail] = React.useState<EmployeeDetail>();
@@ -40,10 +41,12 @@ const Register: React.FC = () => {
         }
     }
 
-    const onFormSubmit = (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
+    const onFormSubmit = (event?: (React.MouseEvent<HTMLAnchorElement, MouseEvent>)) => {
         if (!(factoryDetail?.isValid() && employeeDetail?.isIdValid && securityQuestionDetail?.isValid() && passwordDetail?.isValid())) {
-            event.preventDefault();
+            event?.preventDefault();
         }
+
+        props.onAuthenticationStateChange?.(true);
     }
 
     const onBackButtonClick = () => visibleSlide > 0 && setVisibleSlide(visibleSlide - 1);
@@ -66,7 +69,7 @@ const Register: React.FC = () => {
                         }
                         {
                             isLastSlide() ?
-                                (<Link to="/dashboard" onClick={event => onFormSubmit(event)}><Button variant="contained" color="primary" type="button">Submit</Button></Link>) :
+                                (<Link to="/dashboard" onClick={onFormSubmit}><Button variant="contained" color="primary" type="button">Submit</Button></Link>) :
                                 (<Button onClick={() => onNextButtonClick()} variant="contained" color="primary" type="button">Next</Button>)
                         }
                     </div>

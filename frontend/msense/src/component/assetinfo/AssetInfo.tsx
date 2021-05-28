@@ -1,15 +1,18 @@
 import React from "react";
-import AssetInfoProps from "../../model/props/AssetInfoProp";
+import { useParams } from "react-router";
+import AuthStateProps from "../../model/props/AuthStateProp";
 import AssetHistory from "../assethistory/AssetHistory";
 import AssetInfoItem from "../assetinfoitem/AssetInfoItem";
 import AssetLiveHealth from "../assetlivehealth/AssetLiveHealth";
 import Header from "../header/Header";
 import NotificationPane from "../notification/NotificationPane";
-
 import './assetinfo.css';
 
-const AssetInfo: React.FC<AssetInfoProps> = (props) => {
 
+const AssetInfo: React.FC<AuthStateProps> = (props) => {
+
+    const { assetId } = useParams<Record<string, string | undefined>>()
+    console.log(assetId);
     const [isHistoryVisible, setHistoryVisibility] = React.useState(false);
     const [isNotificationPaneVisible, setNotificationPaneVisiblity] = React.useState(false);
 
@@ -19,7 +22,7 @@ const AssetInfo: React.FC<AssetInfoProps> = (props) => {
     date.setFullYear(2019);
 
     const assetInfo = {
-        id: props.assetId,
+        id: assetId,
         name: "Cutting Machine",
         lastUpdatedHealth: "bad",
         lastMaintenanceDate: date
@@ -28,7 +31,7 @@ const AssetInfo: React.FC<AssetInfoProps> = (props) => {
     return (
         <div className="assetinfo container">
             <div className="header-container dashboard-item">
-                <Header notificationClickAction={() => setNotificationPaneVisiblity(!isNotificationPaneVisible)} />
+                <Header onAuthenticationStateChange={props.onAuthenticationStateChange} notificationClickAction={() => setNotificationPaneVisiblity(!isNotificationPaneVisible)} />
             </div>
             <div className="assetinfo-section">
                 <h1>{assetInfo.name}</h1>

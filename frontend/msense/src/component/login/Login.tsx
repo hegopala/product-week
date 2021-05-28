@@ -1,9 +1,10 @@
 import { Button, FormControl, Input, InputLabel, Link as LinkUI } from '@material-ui/core';
 import React from 'react';
 import isEmail from 'validator/lib/isEmail';
+import AuthStateProps from '../../model/props/AuthStateProp';
 import './login.css';
 
-const Login: React.FC = () => {
+const Login: React.FC<AuthStateProps> = (props) => {
   const [isEmailError, setEmailError] = React.useState(false);
 
   const validateEmail = (val?: string) => {
@@ -17,6 +18,7 @@ const Login: React.FC = () => {
 
   const onFormSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     if (isEmailError) event.preventDefault();
+    props.onAuthenticationStateChange?.(true);
   }
 
   return (
