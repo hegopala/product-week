@@ -11,7 +11,7 @@ const Dashboard: React.FC = () => {
   const [isNotificationPaneVisible, setNotificationPaneVisiblity] = React.useState(false);
 
   return (
-    <div className="dashboard">
+    <div className="dashboard container">
       <div className="header-container dashboard-item">
         <Header notificationClickAction={() => setNotificationPaneVisiblity(!isNotificationPaneVisible)} />
       </div>

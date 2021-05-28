@@ -1,0 +1,23 @@
+.assetinfoitem-container {
+    background-color: rgb(228, 248, 255);
+    padding: 20px;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.75);
+    flex: 0 1 200px;
+}
+
+.assetinfoitem-item-title {
+    font-size: 14px;
+    margin: 0  0 10px 0;
+    color: rgb(75, 75, 75);
+}
+
+.assetinfoitem-item-data, .assetinfoitem-item-health {
+    font-weight: 900;
+    font-size: larger;
+}
+
+.assetinfoitem-item-health {
+    text-transform: capitalize;
+}

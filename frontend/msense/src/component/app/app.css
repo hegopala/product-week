@@ -1,0 +1,45 @@
+.app {
+    margin: 0;
+    padding: 0;
+    border: none;
+    display: flex;
+    justify-content: center;
+}
+
+.product-heading {
+    color: cornflowerblue;
+}
+
+.assethealth-bad-background {
+    background-color: #d4413c;
+}
+
+.assethealth-moderate-background {
+    background-color: #dfdf3b;
+}
+
+.assethealth-good-background {
+    background-color: #00ab66;
+}
+
+.assethealth-bad-text-color {
+    color: #d4413c;
+}
+
+.assethealth-moderate-text-color {
+    color: #dfdf3b;
+}
+
+.assethealth-good-text-color {
+    color: #00ab66;
+}
+
+.container {
+    width: 70%;
+}
+
+@media only screen and (max-width: 1078px) {
+    .container {
+        width: 100%;
+    }
+}
