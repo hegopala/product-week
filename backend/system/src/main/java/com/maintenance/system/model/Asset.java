@@ -1,11 +1,10 @@
 package com.maintenance.system.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * This is model class for the asset
@@ -23,6 +22,7 @@ public class Asset {
 
     @Id
     @Column(name = "ASSET_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer asset_id;
 
     @Column(name = "ASSET_NAME")

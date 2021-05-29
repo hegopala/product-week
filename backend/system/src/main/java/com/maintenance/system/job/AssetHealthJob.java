@@ -1,7 +1,9 @@
 package com.maintenance.system.job;
 
 import com.maintenance.system.controller.AssetHealthController;
+import com.maintenance.system.exception.NoSuchAssetFoundException;
 import com.maintenance.system.model.AssetHealth;
+import com.maintenance.system.repository.AssetHealthRepository;
 import com.maintenance.system.service.AssetHealthService;
 import com.maintenance.system.util.CustomFunctions;
 import lombok.AllArgsConstructor;
@@ -33,12 +35,15 @@ public class AssetHealthJob {
     @Autowired
     AssetHealthController assetHealthController;
 
+    @Autowired
+    AssetHealthRepository assetHealthRepository;
+
     /**
      * This method uses for generate the asset health
      *
      * @return returns the list of generated asset health
      */
-    @Scheduled(fixedDelay = 60000000)
+    @Scheduled(fixedDelay = 600000000)
     public List<AssetHealth> generateAssetHealth() {
 
         CustomFunctions cf = new CustomFunctions();
@@ -51,7 +56,7 @@ public class AssetHealthJob {
         while (count++ < rows) {
             try {
                 AssetHealth assetHealth = AssetHealth.builder()
-                        .asset_id(CustomFunctions.random(cf.propValue(map, "min_asset"), cf.propValue(map, "max_asset")))
+                        .assetId(CustomFunctions.random(cf.propValue(map, "min_asset"), cf.propValue(map, "max_asset")))
                         .velocity_value(CustomFunctions.random(cf.propValue(map, "min_velocity"), cf.propValue(map, "max_velocity")))
                         .pressure_value(CustomFunctions.random(cf.propValue(map, "min_pressure"), cf.propValue(map, "max_pressure")))
                         .health_timestamp(CustomFunctions.currentDateTime())

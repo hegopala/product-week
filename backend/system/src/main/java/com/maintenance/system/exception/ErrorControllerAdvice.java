@@ -89,4 +89,10 @@ public class ErrorControllerAdvice {
     }
 
 
+    @ExceptionHandler(value = FailedToAddException.class)
+    public void exception(FailedToAddException failedToAddException) {
+        log.error("[Failed to add !!!! ] " + failedToAddException);
+    }
+
+
 }

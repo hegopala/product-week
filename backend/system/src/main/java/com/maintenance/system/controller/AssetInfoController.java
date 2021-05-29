@@ -25,7 +25,7 @@ public class AssetInfoController {
      *
      * @return returns the list of the all asset
      */
-    @GetMapping("/getAllAssets")
+    @GetMapping("/get")
     public List<Asset> getAllAssets() {
         return assetService.getAllAssets();
     }
@@ -36,8 +36,15 @@ public class AssetInfoController {
      * @param asset [Asset] (Integer asset_id, String asset_name, String asset_type, Integer asset_floor_id, Integer asset_department_id)
      * @return return the list of added assets
      */
-    @PostMapping("/addAsset")
+    @PostMapping("/add")
     public List<Asset> addAsset(@RequestBody Asset asset) {
         return assetService.addAsset(asset);
     }
+
+    @GetMapping("/getType")
+    public List<Asset> getAssetType(@RequestParam(value = "department", required = false) String depName,
+                                    @RequestParam(value = "floorName", required = false) String floorName) {
+        return assetService.getAssetType(depName, floorName);
+    }
+
 }
