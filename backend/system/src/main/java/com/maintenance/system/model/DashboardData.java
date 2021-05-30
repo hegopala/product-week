@@ -6,7 +6,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import java.util.Date;
 
-
+/**
+ * This is model class for the dashboard data
+ *
+ * @author Gordhan Goyal, Sunil
+ */
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor

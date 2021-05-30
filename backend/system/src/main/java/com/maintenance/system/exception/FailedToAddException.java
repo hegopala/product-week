@@ -1,4 +1,9 @@
 package com.maintenance.system.exception;
 
-public class FailedToAddException extends RuntimeException{
+/**
+ * This is Exception class throws FailedToAddException
+ *
+ * @author Gordhan Goyal
+ */
+public class FailedToAddException extends RuntimeException {
 }

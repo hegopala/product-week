@@ -1,13 +1,17 @@
 package com.maintenance.system.model;
 
 import lombok.*;
-import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+/**
+ * This is department model
+ *
+ * @author Gordhan Goyal
+ */
 @Entity
 @Table(name = "DEPARTMENT")
 @AllArgsConstructor

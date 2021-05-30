@@ -1,7 +1,6 @@
 package com.maintenance.system.job;
 
 import com.maintenance.system.controller.AssetHealthController;
-import com.maintenance.system.exception.NoSuchAssetFoundException;
 import com.maintenance.system.model.AssetHealth;
 import com.maintenance.system.repository.AssetHealthRepository;
 import com.maintenance.system.service.AssetHealthService;
@@ -40,7 +39,7 @@ public class AssetHealthJob {
 
     /**
      * This method uses for generate the asset health
-     *
+     * annotation @Scheduled(fixedDelay = milliseconds)
      * @return returns the list of generated asset health
      */
     @Scheduled(fixedDelay = 600000000)

@@ -39,7 +39,7 @@ public class AssetHealthService {
     }
 
     /**
-     * This method used for fetch the asset health
+     * This method used for fetch the latest health of asset
      *
      * @param asset_id [Integer] takes input for asset id
      * @return returns list of the asset health
@@ -52,6 +52,12 @@ public class AssetHealthService {
         return assetHealthList;
     }
 
+    /**
+     * This method used for fetch the history of  asset health
+     *
+     * @param asset_id [Integer] takes input for asset id
+     * @return returns list of the asset health
+     */
     public List<AssetHealth> getAssetHealthHistory(Integer asset_id) {
         List<AssetHealth> assetHealthList = assetHealthRepository.getAssetHealth(asset_id);
         if (assetHealthList.size() == 0) {

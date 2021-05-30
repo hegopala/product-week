@@ -7,6 +7,11 @@ import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * This is interface for the dashboard repo
+ *
+ * @author Gordhan Goyal, Sunil
+ */
 @Repository
 public interface DashboardRepo extends JpaRepository<DashboardData, Integer> {
 

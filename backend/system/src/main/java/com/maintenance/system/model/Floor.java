@@ -4,6 +4,11 @@ import lombok.*;
 
 import javax.persistence.*;
 
+/**
+ * This is floor model class
+ *
+ * @author Gordhan Goyal
+ */
 @Entity
 @Table(name = "FLOOR")
 @AllArgsConstructor
