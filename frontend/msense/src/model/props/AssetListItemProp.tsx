@@ -1,6 +1,7 @@
+import Asset from "../pojo/Asset";
+
 interface AssetListItemProps {
-    data?: any,
-    health?: number
+    data?: Asset
 }
 
 export default AssetListItemProps;

@@ -1,7 +1,7 @@
-import Cloneable from "./interface/Cloneable";
-import Validatable from "./interface/Validatable";
+import CustomObject from "../interface/CustomObject";
+import Validatable from "../interface/Validatable";
 
-class FactoryDetail implements Cloneable, Validatable {
+class FactoryDetail implements CustomObject, Validatable {
     private name: string;
     private location: string;
     private type: string;

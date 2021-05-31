@@ -1,5 +1,5 @@
-import EmployeeDetail from "../EmployeeDetail";
-import FactoryDetail from "../FactoryDetail";
+import EmployeeDetail from "../pojo/EmployeeDetail";
+
 
 interface EmployeeProps {
     value?: EmployeeDetail

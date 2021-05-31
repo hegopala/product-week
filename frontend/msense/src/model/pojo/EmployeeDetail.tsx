@@ -1,8 +1,8 @@
 import validator from "validator";
-import Cloneable from "./interface/Cloneable";
-import Validatable from "./interface/Validatable";
+import CustomObject from "../interface/CustomObject";
+import Validatable from "../interface/Validatable";
 
-class EmployeeDetail implements Cloneable, Validatable {
+class EmployeeDetail implements CustomObject, Validatable {
     private id: string;
     private email: string;
     private contact: string;

@@ -1,4 +1,4 @@
-import FactoryDetail from "../FactoryDetail";
+import FactoryDetail from "../pojo/FactoryDetail";
 
 interface FactoryProps {
     value?: FactoryDetail

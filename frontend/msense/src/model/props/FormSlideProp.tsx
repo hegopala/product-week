@@ -1,7 +1,8 @@
-import EmployeeDetail from "../EmployeeDetail";
-import FactoryDetail from "../FactoryDetail";
-import PasswordDetail from "../PasswordDetail";
-import SecurityQuestionDetail from "../SecurityQuestionDetail";
+import EmployeeDetail from "../pojo/EmployeeDetail";
+import FactoryDetail from "../pojo/FactoryDetail";
+import PasswordDetail from "../pojo/PasswordDetail";
+import SecurityQuestionDetail from "../pojo/SecurityQuestionDetail";
+
 
 interface FormSlideProps {
     value?: FactoryDetail | EmployeeDetail | SecurityQuestionDetail | PasswordDetail,

@@ -1,6 +1,6 @@
 import { FormControl, Input, InputLabel } from '@material-ui/core';
 import React from 'react';
-import PasswordDetail from '../../../model/PasswordDetail';
+import PasswordDetail from '../../../model/pojo/PasswordDetail';
 import FormSlideProps from '../../../model/props/FormSlideProp';
 
 const Password: React.FC<FormSlideProps> = (props) => {

@@ -1,6 +1,6 @@
 import { FormControl, Input, InputLabel } from '@material-ui/core';
 import React from "react";
-import EmployeeDetail from '../../../model/EmployeeDetail';
+import EmployeeDetail from '../../../model/pojo/EmployeeDetail';
 import FormSlideProps from "../../../model/props/FormSlideProp";
 
 const Employee: React.FC<FormSlideProps> = (props) => {

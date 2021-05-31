@@ -1,7 +1,7 @@
 import { FormControl, Input, InputLabel, NativeSelect } from '@material-ui/core';
 import React from "react";
 import FormSlideProps from '../../../model/props/FormSlideProp';
-import SecurityQuestionDetail from '../../../model/SecurityQuestionDetail';
+import SecurityQuestionDetail from '../../../model/pojo/SecurityQuestionDetail';
 
 const SecurityQuestion: React.FC<FormSlideProps> = (props) => {
     const securityQuestionDetail = props.value ? props.value as SecurityQuestionDetail : new SecurityQuestionDetail();

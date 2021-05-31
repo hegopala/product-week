@@ -1,7 +1,7 @@
-import Cloneable from "./interface/Cloneable";
-import Validatable from "./interface/Validatable";
+import CustomObject from "../interface/CustomObject";
+import Validatable from "../interface/Validatable";
 
-class PasswordDetail implements Cloneable, Validatable {
+class PasswordDetail implements CustomObject, Validatable {
     private main: string;
     private confirm: string;
 

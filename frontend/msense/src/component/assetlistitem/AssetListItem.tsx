@@ -4,10 +4,13 @@ import MachineImage from './../../assets/svg/machine.svg';
 import { Link } from "react-router-dom";
 
 const AssetListItem: React.FC<AssetListItemProps> = (props) => {
+    const asset = props.data;
+    
     return (
-        <Link to={`/asset/${props.data}`}>
-            <div className={getClassNameList(props.health)}>
+        <Link to={`/asset/${asset?.getId()}`} className="no-text-decoration">
+            <div className={getClassNameList(asset?.getHealth())}>
                 <img src={MachineImage} width="50px" alt="Asset" />
+                <span>{asset?.toString()}</span>
             </div>
         </Link>
     );

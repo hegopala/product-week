@@ -1,16 +1,17 @@
 import { Button, Link as LinkUI } from '@material-ui/core';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import EmployeeDetail from '../../model/EmployeeDetail';
-import FactoryDetail from '../../model/FactoryDetail';
-import PasswordDetail from '../../model/PasswordDetail';
+import EmployeeDetail from '../../model/pojo/EmployeeDetail';
+import FactoryDetail from '../../model/pojo/FactoryDetail';
+import PasswordDetail from '../../model/pojo/PasswordDetail';
 import AuthStateProps from '../../model/props/AuthStateProp';
-import SecurityQuestionDetail from '../../model/SecurityQuestionDetail';
+import SecurityQuestionDetail from '../../model/pojo/SecurityQuestionDetail';
 import Employee from './employee/Employee';
 import Factory from './factory/Factory';
 import Password from './password/Password';
 import './register.css';
 import SecurityQuestion from './securityquestion/SecurityQuestion';
+import Loader from '../loader/Loader';
 
 
 const Register: React.FC<AuthStateProps> = (props) => {
@@ -21,6 +22,7 @@ const Register: React.FC<AuthStateProps> = (props) => {
     const [passwordDetail, setPasswordDetail] = React.useState<PasswordDetail>();
 
     const [visibleSlide, setVisibleSlide] = React.useState(0);
+    const [isLoading, setLoading] = React.useState(false);
 
     const onDetailDataChange = (detail: (FactoryDetail | EmployeeDetail | SecurityQuestionDetail | PasswordDetail)) => ((detail instanceof FactoryDetail) && setFactoryDetail(detail)) || ((detail instanceof EmployeeDetail) && setEmployeeDetail(detail)) || ((detail instanceof SecurityQuestionDetail) && setSecurityQuestionDetail(detail)) || ((detail instanceof PasswordDetail) && setPasswordDetail(detail));
 
@@ -42,11 +44,17 @@ const Register: React.FC<AuthStateProps> = (props) => {
     }
 
     const onFormSubmit = (event?: (React.MouseEvent<HTMLAnchorElement, MouseEvent>)) => {
+        event?.preventDefault();
         if (!(factoryDetail?.isValid() && employeeDetail?.isIdValid && securityQuestionDetail?.isValid() && passwordDetail?.isValid())) {
-            event?.preventDefault();
+            // Information not valid
+            return;
         }
-
-        props.onAuthenticationStateChange?.(true);
+        
+        setLoading(true);
+        setTimeout(() => {
+            setLoading(false);
+            props.onAuthenticationStateChange?.(true);
+        }, 2000);
     }
 
     const onBackButtonClick = () => visibleSlide > 0 && setVisibleSlide(visibleSlide - 1);
@@ -57,6 +65,7 @@ const Register: React.FC<AuthStateProps> = (props) => {
 
     return (
         <div className="register">
+            {isLoading ? (<Loader />) : ""}
             <div className="register-form-wrapper">
                 <h1 className="product-heading">MSense</h1>
                 <div className="register-form">
