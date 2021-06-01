@@ -1,0 +1,40 @@
+stages:
+  - build
+  - deploy
+
+maven-build:
+  image: maven:3.6.3-openjdk-11
+  stage: build
+  only:
+  - backend
+  script:
+    - mvn clean install -DskipTests=true -Dalt.build.dir=target
+    - ls -al
+    - pwd
+    - cd /builds/hemanth.g/hemanth-devopstraining/target
+    - ls -al
+  artifacts:
+    paths:
+      - target/*.jar
+
+deploy:
+  stage: deploy
+  only:
+  - backend
+  before_script:
+    - "ServiceName=${CI_PROJECT_NAME/./-}"
+    - "echo $ServiceName"
+    - apk update && apk add openssh-client bash
+    - mkdir -p ~/.ssh
+    - eval $(ssh-agent -s)
+    - echo "$SSH_PRIVATE_KEY" | tr -d '\r' | ssh-add - > /dev/null
+    - touch ~/.ssh/config
+    - echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+    - ssh-keyscan -H $DEPLOY_SERVER_IP >> ~/.ssh/known_hosts
+    
+  script:
+    - echo "Deploying started..."
+    - ssh ubuntu@$DEPLOY_SERVER_IP "./test.sh"
+    - scp ./target/*.jar ubuntu@$DEPLOY_SERVER_IP:~/msense-app/
+    - ssh ubuntu@$DEPLOY_SERVER_IP "./runjar.sh"
+    - echo "Finished deploying the app."
