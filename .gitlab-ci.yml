@@ -11,8 +11,8 @@ maven-build:
     - mvn clean install -DskipTests=true -Dalt.build.dir=target
     - ls -al
     - pwd
-    - cd /builds/hemanth.g/hemanth-devopstraining/target
-    - ls -al
+#    - cd /builds/hemanth.g/hemanth-devopstraining/target
+#    - ls -al
   artifacts:
     paths:
       - target/*.jar
