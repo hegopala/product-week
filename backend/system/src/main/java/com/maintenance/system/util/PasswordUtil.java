@@ -1,8 +1,7 @@
 package com.maintenance.system.util;
 
-import org.mindrot.jbcrypt.BCrypt;
-
 import lombok.NonNull;
+import org.mindrot.jbcrypt.BCrypt;
 
 /**
  * This class used to encrypt the password

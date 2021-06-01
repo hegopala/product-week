@@ -1,7 +1,7 @@
 package com.maintenance.system.controller;
 
-import com.maintenance.system.model.User;
 import com.maintenance.system.model.RegisterUser;
+import com.maintenance.system.model.User;
 import com.maintenance.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

@@ -7,5 +7,5 @@ package com.maintenance.system.exception;
  * @author Sunil Hansda
  */
 
-public class UserNotFoundException extends RuntimeException{
+public class UserNotFoundException extends RuntimeException {
 }

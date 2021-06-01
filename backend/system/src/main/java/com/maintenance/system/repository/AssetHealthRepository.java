@@ -17,6 +17,10 @@ import java.util.List;
 public interface AssetHealthRepository extends JpaRepository<AssetHealth, Integer> {
 
 
-    @Query(value = "SELECT * FROM ASSET_HEALTH a WHERE a.ASSET_ID=?", nativeQuery = true)
-    public List<AssetHealth> findByAssetId(Integer asset_id);
+    @Query(value = "SELECT * FROM ASSET_HEALTH a WHERE a.ASSETID=? ORDER BY health_timestamp desc limit 1;", nativeQuery = true)
+    List<AssetHealth> getLatest(Integer asset_id);
+
+    @Query(value = "SELECT * FROM ASSET_HEALTH a WHERE a.ASSETID=?;", nativeQuery = true)
+    List<AssetHealth> getAssetHealth(Integer asset_id);
+
 }

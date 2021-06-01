@@ -88,5 +88,15 @@ public class ErrorControllerAdvice {
         log.error("[Failed to add asset health !!!! ] " + failedToAddAssetHealthException);
     }
 
+    /**
+     * This is used for throw FailedToAddException in case of failed of addition
+     *
+     * @param failedToAddException [FailedToAddException]
+     */
+    @ExceptionHandler(value = FailedToAddException.class)
+    public void exception(FailedToAddException failedToAddException) {
+        log.error("[Failed to add !!!! ] " + failedToAddException);
+    }
+
 
 }

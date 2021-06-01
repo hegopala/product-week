@@ -1,5 +1,6 @@
 package com.maintenance.system.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -21,12 +22,14 @@ import java.util.Date;
 public class AssetHealth {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
+    @JsonIgnore
     private Integer id;
 
-    @Column(name = "ASSET_ID")
-    private Integer asset_id;
+
+    @Column(name = "ASSETID")
+    private Integer assetId;
 
     @Column(name = "VELOCITY_VALUE")
     private Integer velocity_value;

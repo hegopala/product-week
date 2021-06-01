@@ -31,6 +31,19 @@ public class AssetHealthController {
     }
 
     /**
+     * This api fetches the latest asset health
+     *
+     * @param asset_id takes asset_id for the health
+     * @return list of latest asset health
+     */
+    @GetMapping("/getLatest")
+    //Call after every 10 seconds.
+    public List<AssetHealth> getLatestHealth(@RequestParam(value = "asset-id") Integer asset_id) {
+        return assetHealthService.getLatestHealth(asset_id);
+
+    }
+
+    /**
      * This api fetches the asset health history
      *
      * @param asset_id takes asset_id for the health

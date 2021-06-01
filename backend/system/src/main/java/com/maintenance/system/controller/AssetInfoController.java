@@ -21,13 +21,16 @@ public class AssetInfoController {
     private AssetService assetService;
 
     /**
-     * This api used to get all the asset
+     * This api used to get asset type based on department and floor
      *
-     * @return returns the list of the all asset
+     * @param depName   [department] optional
+     * @param floorName [floorName] optional
+     * @return return the list of asset
      */
-    @GetMapping("/getAllAssets")
-    public List<Asset> getAllAssets() {
-        return assetService.getAllAssets();
+    @GetMapping("/get")
+    public List<Asset> getAllAssets(@RequestParam(value = "department", required = false) String depName,
+                                    @RequestParam(value = "floorName", required = false) String floorName) {
+        return assetService.getAllAssets(depName, floorName);
     }
 
     /**
@@ -36,8 +39,10 @@ public class AssetInfoController {
      * @param asset [Asset] (Integer asset_id, String asset_name, String asset_type, Integer asset_floor_id, Integer asset_department_id)
      * @return return the list of added assets
      */
-    @PostMapping("/addAsset")
+    @PostMapping("/add")
     public List<Asset> addAsset(@RequestBody Asset asset) {
         return assetService.addAsset(asset);
     }
+
+
 }
