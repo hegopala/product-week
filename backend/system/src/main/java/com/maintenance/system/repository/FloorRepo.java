@@ -18,7 +18,6 @@ public interface FloorRepo extends JpaRepository<Floor, Integer> {
     @Query(value = "SELECT * FROM FLOOR f WHERE f.DEPID=?", nativeQuery = true)
     List<Floor> findByDepId(Integer depId);
 
-
     @Query(value = "SELECT f.FLOOR_ID FROM FLOOR f WHERE f.FLOOR_NAME=?", nativeQuery = true)
     Integer getFloorIdByName(String floorName);
 
