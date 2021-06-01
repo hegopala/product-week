@@ -7,6 +7,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+/**
+ * This is department controller
+ *
+ * @author Gordhan Goyal
+ */
 @RestController
 @RequestMapping("department")
 public class DepartmentController {
@@ -14,6 +19,12 @@ public class DepartmentController {
     @Autowired
     DepFloorService depFloorService;
 
+    /**
+     * This method used to add department
+     *
+     * @param department [Object] Department object
+     * @return returns the success in case of successful add or else Failed
+     */
     @PostMapping("/add")
     public String addDep(@RequestBody Department department) {
         List<Department> departmentList = depFloorService.addDep(department);
@@ -25,8 +36,13 @@ public class DepartmentController {
 
     }
 
+    /**
+     * This url fetch the list of the department
+     *
+     * @return returns the list of the department
+     */
     @GetMapping("/get")
-    public List<Department> getDep(){
+    public List<Department> getDep() {
         return depFloorService.getDep();
 
     }

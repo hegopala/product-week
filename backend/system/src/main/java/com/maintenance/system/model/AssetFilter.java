@@ -20,7 +20,6 @@ public class AssetFilter {
     private String assetType;
     private String parameter;
 
-
     private Integer dep_id;
     private Integer floorId;
 

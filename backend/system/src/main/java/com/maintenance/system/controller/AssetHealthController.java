@@ -1,6 +1,5 @@
 package com.maintenance.system.controller;
 
-import com.maintenance.system.job.AssetHealthJob;
 import com.maintenance.system.model.AssetHealth;
 import com.maintenance.system.service.AssetHealthService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,10 +31,10 @@ public class AssetHealthController {
     }
 
     /**
-     * This api fetches the asset health history
+     * This api fetches the latest asset health
      *
      * @param asset_id takes asset_id for the health
-     * @return list of asset health
+     * @return list of latest asset health
      */
     @GetMapping("/getLatest")
     //Call after every 10 seconds.
@@ -44,6 +43,12 @@ public class AssetHealthController {
 
     }
 
+    /**
+     * This api fetches the asset health history
+     *
+     * @param asset_id takes asset_id for the health
+     * @return list of asset health
+     */
     @GetMapping("/get")
     public List<AssetHealth> getAssetHealthHistory(@RequestParam(value = "asset-id") Integer asset_id) {
         return assetHealthService.getAssetHealthHistory(asset_id);

@@ -1,13 +1,14 @@
 package com.maintenance.system.model;
 
 import lombok.*;
-import org.springframework.web.bind.annotation.GetMapping;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
+/**
+ * This is department model
+ *
+ * @author Gordhan Goyal
+ */
 @Entity
 @Table(name = "DEPARTMENT")
 @AllArgsConstructor
@@ -20,6 +21,7 @@ public class Department {
 
     @Id
     @Column(name = "DEP_ID")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer dep_id;
 
     @Column(name = "DEP_NAME")

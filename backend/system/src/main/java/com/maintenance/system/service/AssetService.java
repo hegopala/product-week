@@ -36,9 +36,18 @@ public class AssetService {
     /**
      * This service method is for get all assets
      *
-     * @return list of all assets , throws NoSuchAssetFoundException exception in case of empty list
+     * @param depName   [String] optional
+     * @param floorName [String] optional
+     * @return return the list of all asset or else NoSuchAssetFoundException
      */
-    public List<Asset> getAllAssets() {
+    public List<Asset> getAllAssets(String depName, String floorName) {
+
+        if (depName != null & floorName != null) {
+            Integer dep_id = departmentRepo.getDepIdByDepName(depName);
+            Integer floor_id = floorRepo.getFloorIdByName(floorName);
+            return assetRepository.findAssetType(dep_id, floor_id);
+        }
+
         List<Asset> assetList = assetRepository.findAll();
         if (assetList.size() == 0) throw new NoSuchAssetFoundException();
         return assetList;
@@ -61,22 +70,5 @@ public class AssetService {
         }
         return assetList;
     }
-
-
-    /*public List<Asset> getAssetByDepId(String depName){
-
-        // take dep id from depName
-        Integer dep_id =  departmentRepo.findByDepName(depName);
-        List<Asset> assetList = assetRepository.findByDepId(dep_id);
-        if (assetList.size() == 0) throw new NoSuchAssetFoundException();
-        return assetList;
-    }*/
-
-    public List<Asset> getAssetType(String depName, String floorName){
-        Integer dep_id =  departmentRepo.getDepIdByDepName(depName);
-        Integer floor_id = floorRepo.getFloorIdByName(floorName);
-        return assetRepository.findAssetType(dep_id,floor_id);
-    }
-
 
 }

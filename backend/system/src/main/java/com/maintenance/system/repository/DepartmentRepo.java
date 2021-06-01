@@ -5,6 +5,11 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
+/**
+ * This is interface for the department repo
+ *
+ * @author Gordhan Goyal
+ */
 @Repository
 public interface DepartmentRepo extends JpaRepository<Department, Integer> {
 
